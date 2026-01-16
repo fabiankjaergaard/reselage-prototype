@@ -3212,7 +3212,7 @@ body {
 }
 
 .annotation-left {
-  flex-direction: row-reverse;
+  flex-direction: row;
   right: 0;
 }
 
