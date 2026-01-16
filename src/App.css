@@ -63,7 +63,7 @@ body {
 /* Phone frame for desktop preview */
 .phone-frame {
   width: 375px;
-  min-height: 812px;
+  height: 812px;
   background: #fafafa;
   border-radius: 40px;
   overflow: hidden;
@@ -74,11 +74,24 @@ body {
 
 /* Screen container */
 .screen {
-  min-height: 812px;
+  height: 812px;
   padding: 52px 24px 32px;
   display: flex;
   flex-direction: column;
   background: #fafafa;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar but keep functionality */
+.screen::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.screen {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Screen with sky background */
