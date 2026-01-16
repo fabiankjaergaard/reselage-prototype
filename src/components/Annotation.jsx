@@ -1,7 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-function Annotation({ text, position = 'left', top, arrowPosition = 'middle' }) {
+function Annotation({ text, position = 'left', top, arrowPosition = 'middle', highlightClass }) {
   const [isExpanded, setIsExpanded] = useState(false)
+
+  useEffect(() => {
+    if (highlightClass) {
+      if (isExpanded) {
+        document.body.classList.add(highlightClass)
+      } else {
+        document.body.classList.remove(highlightClass)
+      }
+    }
+    return () => {
+      if (highlightClass) {
+        document.body.classList.remove(highlightClass)
+      }
+    }
+  }, [isExpanded, highlightClass])
 
   return (
     <div

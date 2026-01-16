@@ -368,7 +368,7 @@ function App() {
         ]
       case 'onboarding-complete':
         return [
-          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '620px', position: 'right' }
+          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '620px', position: 'right', highlightClass: 'highlight-microcopy' }
         ]
       case 'morning-lock-screen':
         return [
@@ -400,6 +400,7 @@ function App() {
               text={annotation.text}
               position="left"
               top={annotation.top}
+              highlightClass={annotation.highlightClass}
             />
           ))}
         </div>
@@ -414,6 +415,7 @@ function App() {
               text={annotation.text}
               position="right"
               top={annotation.top}
+              highlightClass={annotation.highlightClass}
             />
           ))}
         </div>

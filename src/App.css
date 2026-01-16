@@ -3296,6 +3296,18 @@ body {
   cursor: pointer;
 }
 
+/* Highlight effects for annotations */
+.highlight-target-microcopy {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+body.highlight-microcopy .highlight-target-microcopy {
+  background: rgba(0, 62, 154, 0.1);
+  box-shadow: 0 0 0 3px var(--sl-blue), 0 0 20px rgba(0, 62, 154, 0.3);
+  transform: scale(1.02);
+}
+
 /* Responsive - for actual mobile */
 @media (max-width: 420px) {
   .phone-frame {

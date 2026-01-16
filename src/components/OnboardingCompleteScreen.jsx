@@ -36,7 +36,7 @@ function OnboardingCompleteScreen({ tripData, onComplete }) {
           </div>
         </div>
 
-        <div className="complete-message">
+        <div className="complete-message highlight-target-microcopy">
           <p>Vi håller dig i handen hela vägen. Om något händer tar vi hand om det så du slipper tänka.</p>
         </div>
       </div>
