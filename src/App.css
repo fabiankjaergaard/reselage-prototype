@@ -2826,12 +2826,11 @@ body {
    ============================================ */
 
 .onboarding-progress {
-  padding: 20px 24px 32px;
-  background: linear-gradient(to bottom, #e3f2fd 0%, #e3f2fd 60%, #fff 100%);
-  margin: -20px -24px 24px;
-  padding-top: 20px;
+  padding: 16px 24px 24px;
+  background: linear-gradient(to bottom, #e3f2fd 0%, #e3f2fd 70%, #fafafa 100%);
+  margin: -20px -24px 20px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Weather scene */
@@ -2918,7 +2917,7 @@ body {
   background: #e0e0e0;
   border-radius: 2px;
   margin: 0 20px;
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 .progress-track-fill {
