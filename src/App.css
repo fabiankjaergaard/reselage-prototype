@@ -2828,8 +2828,8 @@ body {
 .onboarding-progress {
   padding: 20px 24px 32px;
   background: linear-gradient(to bottom, #e3f2fd 0%, #e3f2fd 60%, #fff 100%);
-  margin: -52px -24px 24px;
-  padding-top: 52px;
+  margin: -20px -24px 24px;
+  padding-top: 20px;
   position: relative;
   overflow: hidden;
 }
