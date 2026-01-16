@@ -60,7 +60,6 @@ function OnboardingProgress({ currentStep, totalSteps = 3 }) {
                   <span className="stop-number">{step.id}</span>
                 )}
               </div>
-              <span className="stop-label">{step.label}</span>
             </div>
           )
         })}
