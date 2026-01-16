@@ -3206,9 +3206,13 @@ body {
 .annotation {
   position: absolute;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0;
   pointer-events: auto;
+}
+
+.annotation .annotation-arrow {
+  margin-top: 25px;
 }
 
 .annotation-left {
