@@ -3108,17 +3108,13 @@ body {
 }
 
 .flow-dropdown {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity 0.3s;
 }
 
 .flow-dropdown.active-flow {
   opacity: 1;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .flow-dropdown-header {
@@ -3126,64 +3122,71 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 10px 0;
   background: none;
   border: none;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s;
+}
+
+.flow-dropdown.active-flow .flow-dropdown-header {
+  color: #fff;
 }
 
 .flow-dropdown-header:hover {
-  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 .flow-dropdown-header.expanded {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 4px;
 }
 
 .flow-dropdown-arrow {
-  font-size: 10px;
-  opacity: 0.6;
+  font-size: 8px;
+  opacity: 0.5;
 }
 
 .flow-dropdown-content {
-  padding: 8px 0;
+  padding: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  margin-left: 4px;
 }
 
 .flow-dropdown-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  color: rgba(255, 255, 255, 0.5);
+  gap: 8px;
+  padding: 6px 12px;
+  color: rgba(255, 255, 255, 0.4);
   font-size: 13px;
-  transition: all 0.2s;
 }
 
 .flow-dropdown-item.current {
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .flow-dropdown-item.completed {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .flow-item-indicator {
-  font-size: 12px;
-  width: 16px;
+  font-size: 10px;
+  width: 14px;
   text-align: center;
+  opacity: 0.6;
 }
 
 .flow-dropdown-item.completed .flow-item-indicator {
-  color: #4CAF50;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .flow-dropdown-item.current .flow-item-indicator {
-  color: var(--sl-blue-light);
+  color: #fff;
+  opacity: 1;
 }
 
 /* Annotations */
