@@ -366,6 +366,10 @@ function App() {
           { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'left' },
           { text: 'Tydliga förväntningar - Stina vet precis vad hon får. Mindre stress, mer kontroll över sin morgon.', top: '720px', position: 'right' }
         ]
+      case 'onboarding-complete':
+        return [
+          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '680px', position: 'left' }
+        ]
       case 'morning-lock-screen':
         return [
           { text: 'Stina vaknar och får direkt besked om sin resa', top: '350px' }
