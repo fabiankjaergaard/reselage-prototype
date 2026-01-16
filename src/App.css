@@ -3108,7 +3108,10 @@ body {
 }
 
 .flow-dropdown {
-  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
 }
 
 .flow-dropdown-header {
@@ -3116,75 +3119,72 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0 8px 0;
+  padding: 0;
   background: none;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 11px;
+  color: #333;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.2s;
 }
 
-.flow-dropdown.active-flow .flow-dropdown-header {
-  color: rgba(255, 255, 255, 0.9);
-  border-bottom-color: rgba(255, 255, 255, 0.3);
+.flow-dropdown.active-flow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .flow-dropdown-header:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: #000;
 }
 
 .flow-dropdown-arrow {
-  font-size: 8px;
+  font-size: 10px;
+  color: #666;
   transition: transform 0.2s;
 }
 
 .flow-dropdown-header.expanded .flow-dropdown-arrow {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
 }
 
 .flow-dropdown-content {
   padding: 12px 0 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: 12px;
 }
 
 .flow-dropdown-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 0;
-  color: rgba(255, 255, 255, 0.35);
+  padding: 6px 0;
+  color: #999;
   font-size: 13px;
   font-weight: 400;
 }
 
 .flow-dropdown-item.current {
-  color: #fff;
+  color: var(--sl-blue);
   font-weight: 500;
 }
 
 .flow-dropdown-item.completed {
-  color: rgba(255, 255, 255, 0.55);
+  color: #666;
 }
 
 .flow-item-indicator {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: #ddd;
   font-size: 0;
 }
 
 .flow-dropdown-item.completed .flow-item-indicator {
-  background: rgba(255, 255, 255, 0.4);
+  background: #999;
 }
 
 .flow-dropdown-item.current .flow-item-indicator {
-  background: #fff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  background: var(--sl-blue);
 }
 
 /* Annotations */
