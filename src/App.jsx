@@ -363,7 +363,7 @@ function App() {
         ]
       case 'schedule':
         return [
-          { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'right' }
+          { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'left' }
         ]
       case 'morning-lock-screen':
         return [
