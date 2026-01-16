@@ -368,7 +368,7 @@ function App() {
         ]
       case 'onboarding-complete':
         return [
-          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '680px', position: 'right' }
+          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '620px', position: 'right' }
         ]
       case 'morning-lock-screen':
         return [
