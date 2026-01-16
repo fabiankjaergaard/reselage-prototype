@@ -75,7 +75,7 @@ body {
 /* Screen container */
 .screen {
   height: 700px;
-  padding: 52px 24px 32px;
+  padding: 20px 24px 32px;
   display: flex;
   flex-direction: column;
   background: #fafafa;
