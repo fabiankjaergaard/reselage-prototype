@@ -3098,7 +3098,7 @@ body {
 
 .flow-sidebar {
   position: absolute;
-  left: calc(50% + 420px);
+  left: calc(50% + 210px);
   top: 0;
   width: 200px;
   padding-top: 20px;
