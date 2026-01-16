@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Annotation({ text, position = 'left', top, arrowPosition = 'middle', highlightClass }) {
+function Annotation({ text, position = 'left', top, arrowPosition = 'middle', highlightClass, scrollOffset = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
@@ -18,10 +18,14 @@ function Annotation({ text, position = 'left', top, arrowPosition = 'middle', hi
     }
   }, [isExpanded, highlightClass])
 
+  // Calculate adjusted top position based on scroll
+  const baseTop = parseInt(top) || 0
+  const adjustedTop = `${baseTop - scrollOffset}px`
+
   return (
     <div
       className={`annotation annotation-${position} arrow-${arrowPosition} ${isExpanded ? 'expanded' : 'collapsed'}`}
-      style={{ top: top }}
+      style={{ top: adjustedTop }}
       onClick={() => setIsExpanded(!isExpanded)}
     >
       {isExpanded ? (

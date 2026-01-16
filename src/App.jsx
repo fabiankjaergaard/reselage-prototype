@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import SLAppMockup from './components/SLAppMockup'
 import StartScreen from './components/StartScreen'
@@ -14,6 +14,9 @@ import PlanBScreen from './components/PlanBScreen'
 import ArrivalScreen from './components/ArrivalScreen'
 import MapView from './components/MapView'
 import Annotation from './components/Annotation'
+import TabBar from './components/TabBar'
+import NightTransitionScreen from './components/NightTransitionScreen'
+import TravelLockScreen from './components/TravelLockScreen'
 
 function App() {
   // Current screen state - start with SL app mockup
@@ -40,6 +43,10 @@ function App() {
 
   // Notification scenario for demo
   const [notificationScenario, setNotificationScenario] = useState('normal')
+
+  // Scroll tracking for annotations
+  const [scrollOffset, setScrollOffset] = useState(0)
+  const phoneContentRef = useRef(null)
 
   // Mock data based on saved trip or defaults
   const travelData = {
@@ -93,7 +100,12 @@ function App() {
 
   const handleOnboardingComplete = () => {
     setSetupTripData(null)
-    // Go to morning lock screen to simulate getting the morning notification
+    // Go to night transition to show time passing
+    navigate('night-transition')
+  }
+
+  const handleNightTransitionComplete = () => {
+    // After night transition, show morning lock screen
     navigate('morning-lock-screen')
   }
 
@@ -165,6 +177,70 @@ function App() {
     setTimeout(() => setShowMorningToast(true), 100)
   }
 
+  // Navigation for flow sidebar - jump to specific screens
+  const navigateToOnboardingStep = (stepId) => {
+    // Clear saved trip for onboarding flow
+    setSavedTrip(null)
+    setSetupTripData(null)
+
+    switch (stepId) {
+      case 0: // Välkommen
+        navigate('start')
+        break
+      case 1: // Planera resa
+        navigate('setup')
+        break
+      case 2: // Personalisera
+        setSetupTripData({ from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00' })
+        navigate('save-favorite')
+        break
+      case 3: // Schemalägg
+        setSetupTripData({ from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00', name: 'Till jobbet' })
+        navigate('schedule')
+        break
+      case 4: // Klart
+        const tripData = { from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00', name: 'Till jobbet', schedule: { days: ['mon', 'tue', 'wed', 'thu', 'fri'] } }
+        setSavedTrip(tripData)
+        navigate('onboarding-complete')
+        break
+      case 5: // Godnatt
+        const tripForNight = { from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00', name: 'Till jobbet', schedule: { days: ['mon', 'tue', 'wed', 'thu', 'fri'] } }
+        setSavedTrip(tripForNight)
+        navigate('night-transition')
+        break
+      default:
+        break
+    }
+  }
+
+  const navigateToMorningStep = (stepId) => {
+    // Ensure saved trip exists for morning flow
+    const tripData = { from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00', name: 'Till jobbet', schedule: { days: ['mon', 'tue', 'wed', 'thu', 'fri'] } }
+    setSavedTrip(tripData)
+    setHasDisruption(false)
+    setPlanBActive(false)
+
+    switch (stepId) {
+      case 0: // Morgonnotis
+        navigate('morning-lock-screen')
+        break
+      case 1: // Översikt
+        navigate('start')
+        break
+      case 2: // Under resan
+        navigate('travel')
+        break
+      case 3: // Låsskärm med widget
+        navigate('travel-lock')
+        break
+      case 4: // Framme
+        navigate('arrival')
+        break
+      default:
+        break
+    }
+  }
+
   // Render current screen
   const renderScreen = () => {
     switch (screen) {
@@ -217,6 +293,8 @@ function App() {
             onComplete={handleOnboardingComplete}
           />
         )
+      case 'night-transition':
+        return null // Rendered as full-screen overlay instead
       case 'travel':
         return (
           <TravelModeScreen
@@ -228,6 +306,16 @@ function App() {
             onEndTravelMode={endTravelMode}
             onCompleteTrip={completeTrip}
             onShowMap={() => showMap('travel', planBActive ? 'planb' : 'traveling')}
+            onLockPhone={() => navigate('travel-lock')}
+          />
+        )
+      case 'travel-lock':
+        return (
+          <TravelLockScreen
+            travelData={travelData}
+            hasDisruption={hasDisruption}
+            onUnlock={() => navigate('travel')}
+            onNotificationTap={handleNotificationTap}
           />
         )
       case 'map':
@@ -305,6 +393,8 @@ function App() {
         return 3
       case 'onboarding-complete':
         return 4
+      case 'night-transition':
+        return 5
       default:
         return null
     }
@@ -319,8 +409,10 @@ function App() {
         return savedTrip ? 1 : null
       case 'travel':
         return 2
-      case 'arrival':
+      case 'travel-lock':
         return 3
+      case 'arrival':
+        return 4
       default:
         return null
     }
@@ -334,14 +426,16 @@ function App() {
     { id: 1, label: 'Planera resa' },
     { id: 2, label: 'Personalisera' },
     { id: 3, label: 'Schemalägg' },
-    { id: 4, label: 'Klart' }
+    { id: 4, label: 'Klart' },
+    { id: 5, label: 'Godnatt' }
   ]
 
   const morningSteps = [
     { id: 0, label: 'Morgonnotis' },
     { id: 1, label: 'Översikt' },
     { id: 2, label: 'Under resan' },
-    { id: 3, label: 'Framme' }
+    { id: 3, label: 'Låsskärm' },
+    { id: 4, label: 'Framme' }
   ]
 
   const currentFlow = onboardingStep !== null ? 'onboarding' : (morningStep !== null ? 'morning' : null)
@@ -354,6 +448,27 @@ function App() {
     }
   }, [currentFlow])
 
+  // Reset scroll offset when screen changes
+  useEffect(() => {
+    setScrollOffset(0)
+  }, [screen])
+
+  // Track scroll in phone content
+  useEffect(() => {
+    const handleScroll = (e) => {
+      setScrollOffset(e.target.scrollTop)
+    }
+
+    const phoneContent = phoneContentRef.current
+    if (phoneContent) {
+      const scrollableElement = phoneContent.querySelector('.screen')
+      if (scrollableElement) {
+        scrollableElement.addEventListener('scroll', handleScroll)
+        return () => scrollableElement.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [screen])
+
   // Get annotations for current screen
   const getAnnotations = () => {
     switch (screen) {
@@ -363,12 +478,12 @@ function App() {
         ]
       case 'schedule':
         return [
-          { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'left' },
-          { text: 'Tydliga förväntningar - Stina vet precis vad hon får. Mindre stress, mer kontroll över sin morgon.', top: '720px', position: 'right' }
+          { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'left', highlightClass: 'highlight-days' },
+          { text: 'Tydliga förväntningar - Stina vet precis vad hon får. Mindre stress, mer kontroll över sin morgon.', top: '720px', position: 'right', highlightClass: 'highlight-expectations' }
         ]
       case 'onboarding-complete':
         return [
-          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '620px', position: 'right', highlightClass: 'highlight-microcopy' }
+          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '560px', position: 'right', highlightClass: 'highlight-microcopy' }
         ]
       case 'morning-lock-screen':
         return [
@@ -390,7 +505,13 @@ function App() {
   const annotations = getAnnotations()
 
   return (
-    <div className={`app-container ${showSidebar ? 'with-sidebar' : ''}`}>
+    <>
+      {/* Full-screen night transition overlay */}
+      {screen === 'night-transition' && (
+        <NightTransitionScreen onComplete={handleNightTransitionComplete} />
+      )}
+
+      <div className={`app-container ${showSidebar ? 'with-sidebar' : ''}`}>
       {/* Annotations on the left */}
       {annotations.filter(a => a.position !== 'right').length > 0 && (
         <div className="annotations-container annotations-left">
@@ -400,6 +521,7 @@ function App() {
               text={annotation.text}
               position="left"
               top={annotation.top}
+              scrollOffset={scrollOffset}
               highlightClass={annotation.highlightClass}
             />
           ))}
@@ -415,14 +537,19 @@ function App() {
               text={annotation.text}
               position="right"
               top={annotation.top}
+              scrollOffset={scrollOffset}
               highlightClass={annotation.highlightClass}
             />
           ))}
         </div>
       )}
-      <div className="phone-frame">
+      <div className="phone-frame" ref={phoneContentRef}>
         {renderScreen()}
+        {!['sl-app', 'lock-screen', 'morning-lock-screen', 'map', 'working', 'night-transition', 'travel-lock'].includes(screen) && (
+          <TabBar activeTab="resa" />
+        )}
       </div>
+
       {showSidebar && (
         <div className="flow-sidebar">
           {/* Onboarding flow */}
@@ -439,15 +566,16 @@ function App() {
             {expandedFlow === 'onboarding' && (
               <div className="flow-dropdown-content">
                 {onboardingSteps.map((step) => (
-                  <div
+                  <button
                     key={step.id}
-                    className={`flow-dropdown-item ${onboardingStep === step.id ? 'current' : ''} ${onboardingStep !== null && onboardingStep > step.id ? 'completed' : ''}`}
+                    className={`flow-dropdown-item clickable ${onboardingStep === step.id ? 'current' : ''} ${onboardingStep !== null && onboardingStep > step.id ? 'completed' : ''}`}
+                    onClick={() => navigateToOnboardingStep(step.id)}
                   >
                     <span className="flow-item-indicator">
                       {onboardingStep !== null && onboardingStep > step.id ? '✓' : onboardingStep === step.id ? '●' : '○'}
                     </span>
                     <span className="flow-item-label">{step.label}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -467,22 +595,39 @@ function App() {
             {expandedFlow === 'morning' && (
               <div className="flow-dropdown-content">
                 {morningSteps.map((step) => (
-                  <div
+                  <button
                     key={step.id}
-                    className={`flow-dropdown-item ${morningStep === step.id ? 'current' : ''} ${morningStep !== null && morningStep > step.id ? 'completed' : ''}`}
+                    className={`flow-dropdown-item clickable ${morningStep === step.id ? 'current' : ''} ${morningStep !== null && morningStep > step.id ? 'completed' : ''}`}
+                    onClick={() => navigateToMorningStep(step.id)}
                   >
                     <span className="flow-item-indicator">
                       {morningStep !== null && morningStep > step.id ? '✓' : morningStep === step.id ? '●' : '○'}
                     </span>
                     <span className="flow-item-label">{step.label}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
           </div>
+
+          {/* Demo actions - only on travel screen */}
+          {screen === 'travel' && (
+            <div className="sidebar-demo-actions">
+              <span className="sidebar-demo-label">Demo</span>
+              <button className="sidebar-demo-btn" onClick={() => navigate('travel-lock')}>
+                Lås telefonen
+              </button>
+              {!hasDisruption && !planBActive && (
+                <button className="sidebar-demo-btn" onClick={simulateDisruption}>
+                  Simulera störning
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
+    </>
   )
 }
 

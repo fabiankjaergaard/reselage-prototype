@@ -57,7 +57,7 @@ function ScheduleScreen({ tripData, onComplete, onBack }) {
         <span className="badge-time">Framme {tripData?.arrivalTime || '09:00'}</span>
       </div>
 
-      <div className="card">
+      <div className="card highlight-target-days">
         <div className="card-header">
           <span className="card-title">Aktiva dagar</span>
         </div>
@@ -106,7 +106,7 @@ function ScheduleScreen({ tripData, onComplete, onBack }) {
         </div>
       </div>
 
-      <div className="card card-info">
+      <div className="card card-info highlight-target-expectations">
         <div className="card-header">
           <span className="card-title">Vad händer sen?</span>
         </div>

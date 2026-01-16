@@ -85,7 +85,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
           </div>
           <div className="now-playing-info">
             <p className="now-playing-title">Framgångspodden</p>
-            <p className="now-playing-artist">Hur Grupp 8 från IHM löste SL:s problem</p>
+            <p className="now-playing-artist">#312 Mikael Vemmenby - Hur Grupp 8 från IHM fullständigt briljerade och räddade hela SL:s framtid</p>
             <div className="now-playing-progress">
               <div className="progress-bar-bg">
                 <div className="progress-bar-fill" style={{ width: '34%' }}></div>
@@ -143,13 +143,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
       {showNotification && (
         <div className={`lock-notification ${getNotificationStyle()}`} onClick={onNotificationTap}>
           <div className="notification-header">
-            <div className="notification-app-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="6" width="18" height="12" rx="2"/>
-                <circle cx="7" cy="18" r="2"/>
-                <circle cx="17" cy="18" r="2"/>
-              </svg>
-            </div>
+            <div className="notification-app-icon sl-logo">SL</div>
             <span className="notification-app-name">Reseläge</span>
             <span className="notification-time">nu</span>
           </div>

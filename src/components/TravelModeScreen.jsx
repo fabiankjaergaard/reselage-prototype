@@ -6,7 +6,8 @@ function TravelModeScreen({
   onShowPlanB,
   onEndTravelMode,
   onCompleteTrip,
-  onShowMap
+  onShowMap,
+  onLockPhone
 }) {
   const getOccupancyLevel = (level) => {
     switch (level) {
@@ -105,11 +106,6 @@ function TravelModeScreen({
         <p className="trust-subtext">Vi säger till om något ändras.</p>
       </div>
 
-      {!hasDisruption && !planBActive && (
-        <button className="simulate-btn" onClick={onSimulateDisruption}>
-          Simulera störning
-        </button>
-      )}
 
       <div className="spacer"></div>
 
