@@ -63,7 +63,7 @@ body {
 /* Phone frame for desktop preview */
 .phone-frame {
   width: 375px;
-  height: 812px;
+  height: 700px;
   background: #fafafa;
   border-radius: 40px;
   overflow: hidden;
@@ -74,7 +74,7 @@ body {
 
 /* Screen container */
 .screen {
-  height: 812px;
+  height: 700px;
   padding: 52px 24px 32px;
   display: flex;
   flex-direction: column;
