@@ -81,7 +81,7 @@ function SaveFavoriteScreen({ tripData, onNext, onBack }) {
         </div>
       </div>
 
-      <div className="card">
+      <div className="card highlight-target-preferences">
         <div className="card-header">
           <span className="card-title">Preferenser</span>
         </div>

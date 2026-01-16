@@ -3308,6 +3308,15 @@ body.highlight-microcopy .highlight-target-microcopy {
   transform: scale(1.02);
 }
 
+.highlight-target-preferences {
+  transition: all 0.3s ease;
+}
+
+body.highlight-preferences .highlight-target-preferences {
+  box-shadow: 0 0 0 3px var(--sl-blue), 0 0 20px rgba(0, 62, 154, 0.3);
+  transform: scale(1.02);
+}
+
 /* Responsive - for actual mobile */
 @media (max-width: 420px) {
   .phone-frame {

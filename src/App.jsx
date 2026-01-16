@@ -359,7 +359,7 @@ function App() {
     switch (screen) {
       case 'save-favorite':
         return [
-          { text: 'Personalisering - Stina anger vad som är viktigt för henne. Denna yta kan utökas för att lösa fler pain points i framtiden.', top: '580px', position: 'right' }
+          { text: 'Personalisering - Stina anger vad som är viktigt för henne. Denna yta kan utökas för att lösa fler pain points i framtiden.', top: '580px', position: 'right', highlightClass: 'highlight-preferences' }
         ]
       case 'schedule':
         return [
