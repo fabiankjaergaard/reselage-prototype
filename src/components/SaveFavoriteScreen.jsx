@@ -38,8 +38,8 @@ function SaveFavoriteScreen({ tripData, onNext, onBack }) {
       <OnboardingProgress currentStep={2} />
 
       <div className="screen-header">
-        <h1 className="screen-title">Spara som favorit</h1>
-        <p className="screen-subtitle">Så slipper du skriva in det igen</p>
+        <h1 className="screen-title">Anpassa din resa</h1>
+        <p className="screen-subtitle">Ge den ett namn och ställ in preferenser</p>
       </div>
 
       <div className="card card-highlight">

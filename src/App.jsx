@@ -332,7 +332,7 @@ function App() {
   const onboardingSteps = [
     { id: 0, label: 'Välkommen' },
     { id: 1, label: 'Planera resa' },
-    { id: 2, label: 'Anpassa' },
+    { id: 2, label: 'Personalisera' },
     { id: 3, label: 'Schemalägg' },
     { id: 4, label: 'Klart' }
   ]
