@@ -432,7 +432,9 @@ function App() {
               onClick={() => setExpandedFlow(expandedFlow === 'onboarding' ? null : 'onboarding')}
             >
               <span className="flow-dropdown-title">Flöde 1: Onboarding</span>
-              <span className="flow-dropdown-arrow">{expandedFlow === 'onboarding' ? '▼' : '▶'}</span>
+              <svg className="flow-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </button>
             {expandedFlow === 'onboarding' && (
               <div className="flow-dropdown-content">
@@ -458,7 +460,9 @@ function App() {
               onClick={() => setExpandedFlow(expandedFlow === 'morning' ? null : 'morning')}
             >
               <span className="flow-dropdown-title">Flöde 2: D-day</span>
-              <span className="flow-dropdown-arrow">{expandedFlow === 'morning' ? '▼' : '▶'}</span>
+              <svg className="flow-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </button>
             {expandedFlow === 'morning' && (
               <div className="flow-dropdown-content">

@@ -3137,13 +3137,12 @@ body {
 }
 
 .flow-dropdown-arrow {
-  font-size: 10px;
-  color: #666;
+  color: #999;
   transition: transform 0.2s;
 }
 
 .flow-dropdown-header.expanded .flow-dropdown-arrow {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }
 
 .flow-dropdown-content {
