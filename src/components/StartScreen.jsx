@@ -84,7 +84,7 @@ function StartScreen({
           <p className="welcome-text">Slipp stressen att hålla koll själv</p>
         </div>
 
-        <div className="card">
+        <div className="card highlight-target-value-props">
           <div className="card-header">
             <span className="card-title">Vad vi gör för dig</span>
           </div>
@@ -127,13 +127,14 @@ function StartScreen({
         </div>
       )}
 
-      <div className="screen-header">
+      <div className="morning-header">
+        <img src="/coffee-cup-transparent.gif" alt="Morgonkaffe" className="morning-illustration highlight-target-morning-coffee" />
         <p className="screen-greeting">God morgon</p>
         <h1 className="screen-title">Stina</h1>
         <p className="screen-subtitle">Torsdag 16 januari</p>
       </div>
 
-      <div className="status-card status-ok">
+      <div className="status-card status-ok highlight-target-status-card">
         <div className="status-dot"></div>
         <span className="status-text">Din resa är under kontroll</span>
       </div>
@@ -168,16 +169,15 @@ function StartScreen({
         </div>
       </div>
 
-      <button className="map-btn" onClick={onShowMap}>
+      <button className="map-btn highlight-target-live-map" onClick={onShowMap}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
           <circle cx="12" cy="9" r="2.5"/>
         </svg>
         Se var din buss är
-        <span className="live-badge">Live</span>
       </button>
 
-      <div className="card">
+      <div className="card highlight-target-occupancy">
         <div className="card-header">
           <span className="card-title">Förväntad beläggning</span>
           {savedTrip?.preferSeat && (

@@ -1,109 +1,118 @@
-import { useState, useEffect } from 'react'
-import Toast from './Toast'
+import { useState } from 'react'
 
 function DisruptionScreen({ travelData, onFollowPlanB, onChooseMyself }) {
-  const [showToast, setShowToast] = useState(false)
+  const [expandedCard, setExpandedCard] = useState(null)
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowToast(true)
-    }, 400)
-    return () => clearTimeout(timer)
-  }, [])
+  const currentSteps = [
+    { title: 'Fortsätt på Röda linjen', detail: 'Försenad ca 6 min' },
+    { title: 'Kliv av vid Medborgarplatsen', detail: 'Ankomst ca 08:54' }
+  ]
+
+  const recommendedSteps = [
+    { title: 'Gå till hållplats B', detail: '2 min promenad österut' },
+    { title: 'Ta buss 172', detail: 'Avgår kl 08:15' },
+    { title: 'Kliv av vid Medborgarplatsen', detail: 'Ankomst ca 08:48' }
+  ]
 
   return (
-    <div className="screen">
-      {showToast && (
-        <div className="toast-container">
-          <Toast
-            type="alert"
-            message={
-              <>
-                <p>Störning på tunnelbanan</p>
-                <p>Röda linjen försenad vid Slussen</p>
-              </>
-            }
-            autoDismiss={false}
-          />
-        </div>
-      )}
-
-      <div className="screen-header" style={{ marginTop: '80px' }}>
-        <h1 className="screen-title">Ändring upptäckt</h1>
-        <p className="screen-subtitle">Vi har en lösning</p>
+    <div className="screen clean-solution">
+      {/* Header */}
+      <div className="clean-header highlight-target-disruption-header">
+        <h1 className="clean-title">Ändring upptäckt</h1>
+        <p className="clean-subtitle">Vi har hittat en alternativ rutt</p>
       </div>
 
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Konsekvens för dig</span>
+      {/* Nuvarande rutt */}
+      <div
+        className={`clean-card clean-card-expandable ${expandedCard === 'current' ? 'expanded' : ''}`}
+        onClick={() => setExpandedCard(expandedCard === 'current' ? null : 'current')}
+      >
+        <div className="clean-card-header-row">
+          <p className="clean-card-label">Din planerade resa</p>
+          <svg
+            className={`expand-icon ${expandedCard === 'current' ? 'rotated' : ''}`}
+            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+          >
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
         </div>
-        <div className="card-content">
-          {travelData.delayMinutes > 5 ? (
-            <>
-              <p className="impact-negative">
-                Du blir {travelData.delayMinutes} minuter sen
-              </p>
-              <p className="impact-detail">Men vi har en lösning som fungerar.</p>
-            </>
-          ) : (
-            <>
-              <p className="impact-positive">
-                Du kommer fortfarande hinna i tid
-              </p>
-              <p className="impact-detail">Vi har justerat din rutt automatiskt.</p>
-            </>
-          )}
-        </div>
-      </div>
-
-      <div className="card card-recommendation">
-        <div className="card-header">
-          <span className="card-title">Vår rekommendation</span>
-        </div>
-        <div className="card-content">
-          <p className="recommendation-title">Gå till hållplats B</p>
-          <p className="recommendation-detail">2 minuters promenad härifrån</p>
-          <p className="recommendation-route">Ta buss 172 istället → Framme 08:48</p>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Beläggningsjämförelse</span>
-        </div>
-        <div className="card-content">
-          <div className="occupancy-comparison">
-            <div className="occupancy-compare-item">
-              <span className="occupancy-compare-label">Nuvarande rutt</span>
-              <div className="occupancy-compare-value occupancy-high">
-                <div className="occupancy-indicator"></div>
-                <span>Mycket fullt</span>
-              </div>
-            </div>
-            <div className="occupancy-compare-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-            <div className="occupancy-compare-item">
-              <span className="occupancy-compare-label">Alternativ rutt</span>
-              <div className="occupancy-compare-value occupancy-low">
-                <div className="occupancy-indicator"></div>
-                <span>Gott om plats</span>
-              </div>
-            </div>
+        <div className="clean-card-row">
+          <div className="clean-card-info">
+            <p className="clean-card-title">Röda linjen</p>
+            <p className="clean-card-detail">Störning vid Slussen</p>
+          </div>
+          <div className="clean-badge clean-badge-red delay-times">
+            <span className="time-original">08:48</span>
+            <span className="time-new">08:54</span>
           </div>
         </div>
+        <div className="clean-occupancy">
+          <span className="status-dot status-dot-red"></span>
+          <span>Mycket fullt</span>
+        </div>
+
+        {/* Expanderat innehåll */}
+        {expandedCard === 'current' && (
+          <div className="expanded-steps">
+            {currentSteps.map((step, index) => (
+              <div key={index} className="expanded-step">
+                <div className="step-number step-number-muted">{index + 1}</div>
+                <div className="step-content">
+                  <p className="step-title">{step.title}</p>
+                  <p className="step-detail">{step.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="trust-message">
-        <p>SL tar ansvar för din resa.</p>
-        <p className="trust-subtext">Du behöver inte leta information själv.</p>
+      {/* Rekommenderad rutt */}
+      <div
+        className={`clean-card clean-card-recommended highlight-target-disruption-recommended ${expandedCard === 'recommended' ? 'expanded' : ''}`}
+        onClick={() => setExpandedCard(expandedCard === 'recommended' ? null : 'recommended')}
+      >
+        <div className="clean-card-header-row">
+          <p className="clean-card-label">Rekommenderad resa</p>
+          <svg
+            className={`expand-icon ${expandedCard === 'recommended' ? 'rotated' : ''}`}
+            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+          >
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </div>
+        <div className="clean-card-row">
+          <div className="clean-card-info">
+            <p className="clean-card-title">Buss 172</p>
+            <p className="clean-card-detail">2 min promenad till hållplats B</p>
+          </div>
+          <div className="clean-badge clean-badge-green">
+            08:48
+          </div>
+        </div>
+        <div className="clean-occupancy">
+          <span className="status-dot status-dot-green"></span>
+          <span>Gott om plats</span>
+        </div>
+
+        {/* Expanderat innehåll */}
+        {expandedCard === 'recommended' && (
+          <div className="expanded-steps">
+            {recommendedSteps.map((step, index) => (
+              <div key={index} className="expanded-step">
+                <div className="step-number">{index + 1}</div>
+                <div className="step-content">
+                  <p className="step-title">{step.title}</p>
+                  <p className="step-detail">{step.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="spacer"></div>
-
-      <div className="btn-container">
+      {/* Actions */}
+      <div className="clean-actions">
         <button className="btn btn-primary" onClick={onFollowPlanB}>
           Följ rekommendationen
         </button>

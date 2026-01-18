@@ -31,15 +31,34 @@ function TravelModeScreen({
         <span className="plan-b-badge">Alternativ rutt aktiv</span>
       )}
 
-      <div className={`status-card ${planBActive ? 'status-planb' : 'status-ok'}`}>
-        <div className="status-dot"></div>
-        <span className="status-text">
-          {planBActive
-            ? `Alternativ rutt – framme ${travelData.arrivalTime}`
-            : `Allt flyter – framme ${travelData.arrivalTime}`
-          }
-        </span>
-      </div>
+      {hasDisruption && !planBActive ? (
+        <>
+          <div className="status-card status-disruption">
+            <div className="status-dot"></div>
+            <span className="status-text">Störning på din rutt</span>
+          </div>
+
+          <div className="disruption-alert-card">
+            <div className="disruption-alert-header">
+              <span>Röda linjen försenad vid Slussen</span>
+            </div>
+            <p className="disruption-alert-text">Din resa påverkas med ca 6 minuter.</p>
+            <button className="btn btn-secondary" onClick={onShowPlanB}>
+              Hitta alternativ rutt
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="status-card status-ok">
+          <div className="status-dot"></div>
+          <span className="status-text">
+            {planBActive
+              ? `Allt flyter – framme ${travelData.arrivalTime}`
+              : `Allt flyter – framme ${travelData.arrivalTime}`
+            }
+          </span>
+        </div>
+      )}
 
       <button className="map-btn" onClick={onShowMap}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -47,26 +66,26 @@ function TravelModeScreen({
           <circle cx="12" cy="9" r="2.5"/>
         </svg>
         Visa på karta
-        <span className="live-badge">Live</span>
       </button>
 
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Nästa steg</span>
+      <div className="next-step-card highlight-target-next-step">
+        <div className="next-step-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
+          </svg>
         </div>
-        <div className="card-content">
-          {planBActive ? (
-            <>
-              <p className="next-step-title">Buss 172 från Hållplats B</p>
-              <p className="next-step-detail">Avgår {travelData.nextStopTime}</p>
-            </>
-          ) : (
-            <>
-              <p className="next-step-title">Kliv av vid {travelData.nextStop}</p>
-              <p className="next-step-detail">Klockan {travelData.nextStopTime}</p>
-            </>
-          )}
-        </div>
+        <p className="next-step-label">Nästa steg</p>
+        {planBActive ? (
+          <>
+            <p className="next-step-action">Buss 172 från Hållplats B</p>
+            <p className="next-step-time">Avgår {travelData.nextStopTime}</p>
+          </>
+        ) : (
+          <>
+            <p className="next-step-action">Kliv av vid {travelData.nextStop}</p>
+            <p className="next-step-time">Klockan {travelData.nextStopTime}</p>
+          </>
+        )}
       </div>
 
       <div className="card">
@@ -110,11 +129,6 @@ function TravelModeScreen({
       <div className="spacer"></div>
 
       <div className="btn-container">
-        {!planBActive && (
-          <button className="btn btn-secondary" onClick={onShowPlanB}>
-            Visa alternativ rutt
-          </button>
-        )}
         <button className="btn btn-primary" onClick={onCompleteTrip}>
           Jag är framme
         </button>

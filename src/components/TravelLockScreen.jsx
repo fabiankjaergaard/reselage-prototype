@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisruption }) {
+function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisruption, appVersion = 'personal' }) {
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisrupti
   const minutesLeft = 18
 
   return (
-    <div className="travel-lock-screen">
+    <div className={`travel-lock-screen ${appVersion === 'neutral' ? 'travel-lock-screen-neutral' : ''}`}>
       {/* Time and date */}
       <div className="lock-time-display">
         <span className="lock-time">{formatTime(currentTime)}</span>
@@ -34,22 +34,22 @@ function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisrupti
       <div className={`live-activity-widget ${hasDisruption ? 'has-disruption' : ''}`}>
         <div className="widget-header">
           <div className="widget-app-info">
-            <div className="widget-app-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="6" width="18" height="12" rx="2" stroke="#fff" strokeWidth="2"/>
-                <circle cx="7" cy="18" r="2" fill="#fff"/>
-                <circle cx="17" cy="18" r="2" fill="#fff"/>
-                <path d="M5 10h14" stroke="#fff" strokeWidth="1.5"/>
-              </svg>
-            </div>
+            <div className="widget-app-icon sl-logo-icon">SL</div>
             <span className="widget-app-name">Reseläge</span>
           </div>
-          <div className={`widget-status-badge ${hasDisruption ? 'disruption' : 'active'}`}>
-            {hasDisruption ? 'Störning' : 'Live'}
+          <div className={`widget-status-indicator ${hasDisruption ? 'disruption' : 'ok'}`}>
+            <span className="status-dot"></span>
+            {hasDisruption ? 'Störning' : 'Allt flyter'}
           </div>
         </div>
 
         <div className="widget-content">
+          {/* Transport line */}
+          <div className="widget-transport-line">
+            <span className="transport-line-badge">Röda linjen</span>
+            <span className="transport-direction">→ {travelData?.destination || 'Kontoret, Medborgarplatsen'}</span>
+          </div>
+
           {/* Journey visualization */}
           <div className="journey-visual">
             <div className="journey-endpoints">
@@ -70,12 +70,14 @@ function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisrupti
             </div>
           </div>
 
+          {/* Next stop highlight */}
+          <div className="widget-next-stop-highlight">
+            <span className="next-stop-label">Kliv av nästa</span>
+            <span className="next-stop-name">{travelData?.nextStop || 'Slussen'}</span>
+          </div>
+
           {/* Status info */}
           <div className="widget-info-row">
-            <div className="widget-info-item">
-              <span className="widget-info-label">Nästa stopp</span>
-              <span className="widget-info-value">{travelData?.nextStop || 'Slussen'}</span>
-            </div>
             <div className="widget-info-item">
               <span className="widget-info-label">Framme</span>
               <span className="widget-info-value">{travelData?.arrivalTime || '08:42'}</span>

@@ -16,15 +16,16 @@ function ArrivalScreen({ onSave, onSkip, hasFavoriteRoute }) {
         <p className="screen-subtitle">Du har nått din destination</p>
       </div>
 
-      <div className="card">
-        <div className="card-header">
-          <div className="success-icon"></div>
-          <span className="card-title">Resan är avslutad</span>
+      <div className="card arrival-hero-card">
+        <div className="arrival-hero-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
         </div>
-        <div className="card-content">
-          <p className="arrival-time">Du kom fram 08:48</p>
-          <p className="arrival-route">Till kontoret via alternativ rutt</p>
-        </div>
+        <p className="arrival-hero-title">Du kom fram i tid!</p>
+        <p className="arrival-hero-time">08:48 till Kontoret</p>
+        <div className="arrival-hero-divider"></div>
+        <p className="arrival-hero-saved">Du undvek 6 min försening tack vare alternativ rutt</p>
       </div>
 
       <div className="card">
@@ -62,13 +63,7 @@ function ArrivalScreen({ onSave, onSkip, hasFavoriteRoute }) {
         </div>
       </div>
 
-      {hasFavoriteRoute && (
-        <div className="trust-message">
-          <p>Den här resan är sparad som favorit</p>
-          <p className="trust-subtext">Du får morgonuppdateringar automatiskt</p>
-        </div>
-      )}
-
+      
       <div className="spacer"></div>
 
       <div className="btn-container">

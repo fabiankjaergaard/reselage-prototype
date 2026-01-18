@@ -1,25 +1,16 @@
 import { useState, useEffect } from 'react'
-import Toast from './Toast'
 
 function WorkingScreen({ onSolutionReady }) {
-  const [showToast, setShowToast] = useState(false)
   const [progress, setProgress] = useState(0)
   const [statusText, setStatusText] = useState('Analyserar störningen...')
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowToast(true)
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
     const stages = [
-      { progress: 20, text: 'Analyserar störningen...', delay: 600 },
-      { progress: 45, text: 'Söker alternativa rutter...', delay: 1200 },
-      { progress: 70, text: 'Beräknar nya tider...', delay: 1800 },
-      { progress: 90, text: 'Verifierar lösningen...', delay: 2400 },
-      { progress: 100, text: 'Klar', delay: 2800 },
+      { progress: 20, text: 'Analyserar störningen...', delay: 1200 },
+      { progress: 45, text: 'Söker alternativa rutter...', delay: 2800 },
+      { progress: 70, text: 'Beräknar nya tider...', delay: 4400 },
+      { progress: 90, text: 'Verifierar lösningen...', delay: 5600 },
+      { progress: 100, text: 'Klar', delay: 6400 },
     ]
 
     const timers = stages.map((stage) =>
@@ -31,7 +22,7 @@ function WorkingScreen({ onSolutionReady }) {
 
     const finishTimer = setTimeout(() => {
       onSolutionReady()
-    }, 3200)
+    }, 7200)
 
     return () => {
       timers.forEach(clearTimeout)
@@ -41,28 +32,14 @@ function WorkingScreen({ onSolutionReady }) {
 
   return (
     <div className="screen working-screen">
-      {showToast && (
-        <div className="toast-container">
-          <Toast
-            type="alert"
-            message={
-              <>
-                <p>Störning på tunnelbanan</p>
-                <p>Röda linjen försenad vid Slussen</p>
-              </>
-            }
-            autoDismiss={false}
-          />
-        </div>
-      )}
-
       <div className="working-content">
-        <div className="working-icon-container">
-          <div className="working-spinner"></div>
+        <div className="working-lotus-container">
+          <img src="/lotus-flower-transparent.gif" alt="Lugn" className="working-lotus" />
         </div>
 
-        <h1 className="working-title">Söker lösning</h1>
-        <p className="working-subtitle">Vi fixar detta åt dig</p>
+        <h1 className="working-title">Ingen panik!</h1>
+        <p className="working-subtitle">Vi hittar en alternativ väg åt dig</p>
+        <p className="working-subtitle-secondary">Du kommer fortfarande hinna fram i tid</p>
 
         <div className="working-progress-container">
           <div className="working-progress-bar">
@@ -72,11 +49,6 @@ function WorkingScreen({ onSolutionReady }) {
             ></div>
           </div>
           <p className="working-status">{statusText}</p>
-        </div>
-
-        <div className="working-reassurance">
-          <p>Du behöver inte göra något.</p>
-          <p>Vi hittar bästa alternativet automatiskt.</p>
         </div>
       </div>
     </div>

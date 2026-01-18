@@ -172,28 +172,17 @@ function MapView({ travelData, planBActive, mapContext = 'traveling', onClose })
         </div>
       </div>
 
-      {/* Bottom info */}
+      {/* Bottom info - simplified */}
       <div className="map-bottom-panel">
-        {nextInfo && (
-          <div className="next-stop-card">
-            <div className="next-stop-content">
-              <span className="next-stop-label">{nextInfo.label}</span>
-              <span className="next-stop-time">{nextInfo.time}</span>
-            </div>
-            <div className="next-stop-icon" style={{ background: lineColor }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-2H3v2zm4-11l-4 4 4 4v-3h5v-2H7v-3z"/>
-              </svg>
-            </div>
+        <div className="arrival-card-simple">
+          <div className="arrival-info-simple">
+            <span className="arrival-destination-simple">{travelData.destination}</span>
+            <span className="arrival-time-simple">Framme {travelData.arrivalTime}</span>
           </div>
-        )}
-
-        <div className="arrival-card">
-          <div className="arrival-info">
-            <span className="arrival-destination">{travelData.destination}</span>
-            <span className="arrival-label">Beräknad ankomst</span>
+          <div className="arrival-status">
+            <span className="status-dot status-dot-green"></span>
+            <span>I tid</span>
           </div>
-          <div className="arrival-time">{travelData.arrivalTime}</div>
         </div>
       </div>
     </div>
