@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function SLAppMockup({ onOpenReselage }) {
+function SLAppMockup({ onOpenReselage, highlightReselage = false }) {
   const [activeTopTab, setActiveTopTab] = useState('search')
   const [activeBottomTab, setActiveBottomTab] = useState('resa')
 
@@ -55,7 +55,7 @@ function SLAppMockup({ onOpenReselage }) {
         {topTabs.map(tab => (
           <button
             key={tab.id}
-            className={`sl-top-tab ${activeTopTab === tab.id ? 'active' : ''} ${tab.id === 'reselage' ? 'reselage-tab' : ''}`}
+            className={`sl-top-tab ${activeTopTab === tab.id ? 'active' : ''} ${tab.id === 'reselage' ? 'reselage-tab' : ''} ${tab.id === 'reselage' && highlightReselage ? 'highlight-pulse' : ''}`}
             onClick={() => handleTabClick(tab.id)}
           >
             {tab.label}

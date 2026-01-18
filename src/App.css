@@ -2616,6 +2616,75 @@ body {
   overflow: hidden;
 }
 
+/* Narration panel */
+.narration-panel {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 320px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.narration-panel.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.narration-text {
+  font-size: 24px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.typing-cursor {
+  animation: blink-cursor 0.7s step-end infinite;
+  font-weight: 100;
+  margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Banana rating */
+.banana-rating {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  font-size: 32px;
+}
+
+.banana {
+  opacity: 0;
+  transform: scale(0) rotate(-20deg);
+  animation: banana-pop 0.4s ease-out forwards;
+}
+
+.banana-1 { animation-delay: 0.1s; }
+.banana-2 { animation-delay: 0.25s; }
+.banana-3 { animation-delay: 0.4s; }
+.banana-4 { animation-delay: 0.55s; }
+.banana-5 { animation-delay: 0.7s; }
+
+@keyframes banana-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-20deg);
+  }
+  50% {
+    transform: scale(1.3) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 /* Sun */
 .intro-sun {
   position: absolute;
@@ -4320,6 +4389,31 @@ body {
   color: var(--sl-blue-light);
 }
 
+/* Highlight pulse animation for narration */
+.sl-top-tab.highlight-pulse {
+  animation: tab-highlight-pulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.sl-top-tab.highlight-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px -8px;
+  border-radius: 8px;
+  background: rgba(0, 92, 185, 0.15);
+  animation: tab-glow 2s ease-in-out infinite;
+}
+
+@keyframes tab-highlight-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes tab-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
 /* ============================================
    ONBOARDING PROGRESS BAR
    ============================================ */
@@ -4725,6 +4819,7 @@ body {
   width: 200px;
   height: 100%;
   pointer-events: none;
+  z-index: 10;
 }
 
 .annotations-container.annotations-left {
@@ -5101,25 +5196,24 @@ body.highlight-disruption-trust .highlight-target-disruption-trust {
 
 /* Next stop highlight */
 .widget-next-stop-highlight {
-  background: rgba(52, 199, 89, 0.15);
-  border: 1px solid rgba(52, 199, 89, 0.3);
-  border-radius: 10px;
-  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
 }
 
 .next-stop-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  color: #34c759;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .next-stop-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
 }

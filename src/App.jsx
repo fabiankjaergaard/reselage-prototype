@@ -21,7 +21,7 @@ import SMSView from './components/SMSView'
 
 function App() {
   // App version: 'personal' (with Fabio) or 'neutral' (standard)
-  const [appVersion, setAppVersion] = useState('personal')
+  const [appVersion, setAppVersion] = useState('neutral')
 
   // Current screen state - start with intro
   const [screen, setScreen] = useState('intro')
@@ -51,6 +51,31 @@ function App() {
   // Trigger notification on lock screen (for demo click)
   const [triggerLockNotification, setTriggerLockNotification] = useState(false)
 
+  // Typewriter state for narration
+  const [typedText, setTypedText] = useState('')
+  const [typingComplete, setTypingComplete] = useState(false)
+  const [narrationHidden, setNarrationHidden] = useState(false)
+
+  // Narration texts for different screens (function to allow state-based text)
+  const getNarrationText = (screenName) => {
+    const texts = {
+      'discovery-lock': 'Det är kväll och Stina får en pushnotis från SL om en ny funktion...',
+      'sl-app': 'Hon klickar på notisen och ser att SL har lagt till en ny funktion...',
+      'setup': 'Stina går igenom onboardingen och fyller i det SL behöver för att anpassa sig efter henne...',
+      'morning-lock-screen': 'Det är morgon och Stina får sin första pushnotis från Reseläge...',
+      'lock-screen': 'Stina sitter på bussen och lyssnar på en podd när hon plötsligt får en notis...',
+      'travel': planBActive
+        ? 'Stina pustar ut och känner sig lugn igen. Skönt när någon tänker åt en...'
+        : hasDisruption
+          ? 'Stina får lite panik och klickar på notisen – men SL har redan en lösning...'
+          : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka...',
+      'disruption': 'Hon ser den nya rutten och tycker den ser bra ut – framme i tid och gott om plats...',
+      'travel-lock': 'Skönt att snabbt kunna se hur resan går utan att låsa upp mobilen...',
+      'arrival': 'Det här var ju väldigt smidigt, tänker Stina. Framme i tid trots störningar – och sittplats hela vägen! 5/5 kreativa bananer!'
+    }
+    return texts[screenName]
+  }
+
   // Scroll tracking for annotations
   const [scrollOffset, setScrollOffset] = useState(0)
   const phoneContentRef = useRef(null)
@@ -68,6 +93,38 @@ function App() {
 
   // Don't auto-show toast - user already saw notification on lock screen
 
+  // Typewriter effect for screens with narration
+  useEffect(() => {
+    const narrationText = getNarrationText(screen)
+
+    if (narrationText) {
+      // Reset on screen enter
+      setTypedText('')
+      setTypingComplete(false)
+      setNarrationHidden(false)
+
+      let index = 0
+      const interval = setInterval(() => {
+        if (index < narrationText.length) {
+          setTypedText(narrationText.slice(0, index + 1))
+          index++
+        } else {
+          clearInterval(interval)
+          // Wait a moment, then mark complete
+          setTimeout(() => {
+            setTypingComplete(true)
+            // Trigger notification for lock screens
+            if (screen === 'discovery-lock' || screen === 'lock-screen') {
+              setTriggerLockNotification(true)
+            }
+          }, 500)
+        }
+      }, 50) // 50ms per character
+
+      return () => clearInterval(interval)
+    }
+  }, [screen])
+
   // Navigation functions
   const navigate = (newScreen) => {
     setScreen(newScreen)
@@ -75,11 +132,17 @@ function App() {
     setTriggerLockNotification(false)
   }
 
-  // Handle background click to trigger lock screen notification
+  // Handle background click to trigger lock screen notification or hide narration
   const handleBackgroundClick = (e) => {
     // Only trigger if clicking on the background (not the phone frame)
-    if (e.target.classList.contains('app-container') && screen === 'lock-screen') {
-      setTriggerLockNotification(true)
+    if (e.target.classList.contains('app-container')) {
+      if (screen === 'lock-screen') {
+        setTriggerLockNotification(true)
+      }
+      // Hide narration when clicking background
+      if (getNarrationText(screen) && !narrationHidden) {
+        setNarrationHidden(true)
+      }
     }
   }
 
@@ -289,6 +352,7 @@ function App() {
           <LockScreen
             variant="discovery"
             appVersion={appVersion}
+            triggerNotification={triggerLockNotification}
             onNotificationTap={() => appVersion === 'personal' ? navigate('sms-view') : navigate('sl-app')}
           />
         )
@@ -302,6 +366,7 @@ function App() {
         return (
           <SLAppMockup
             onOpenReselage={() => navigate('start')}
+            highlightReselage={typingComplete}
           />
         )
       case 'start':
@@ -577,12 +642,10 @@ function App() {
       case 'morning-lock-screen':
         return []
       case 'travel':
-        return [
-          { text: 'Det viktigaste görs mest prominent – Stina behöver aldrig tänka, vi säger till när hon ska agera.', top: '340px', position: 'left', highlightClass: 'highlight-next-step' }
-        ]
+        return []
       case 'disruption':
         return [
-          { text: 'Tydlig jämförelse – Stina ser direkt skillnaden mellan att stanna kvar vs. ta alternativet. Enkel beslutssituation.', top: '350px', position: 'left', highlightClass: 'highlight-disruption-recommended' }
+          { text: 'Tydlig jämförelse – Stina ser direkt skillnaden mellan att stanna kvar vs. ta alternativet. Enkel beslutssituation.', top: '420px', position: 'left', highlightClass: 'highlight-disruption-recommended' }
         ]
       case 'start':
         if (savedTrip) {
@@ -648,6 +711,25 @@ function App() {
           <TabBar activeTab="resa" />
         )}
       </div>
+
+      {/* Narration panel for screens with narration */}
+      {getNarrationText(screen) && (
+        <div className={`narration-panel ${narrationHidden ? 'hidden' : ''}`}>
+          <p className="narration-text">
+            {typedText}
+            {!typingComplete && <span className="typing-cursor">|</span>}
+          </p>
+          {screen === 'arrival' && typingComplete && (
+            <div className="banana-rating">
+              <span className="banana banana-1">🍌</span>
+              <span className="banana banana-2">🍌</span>
+              <span className="banana banana-3">🍌</span>
+              <span className="banana banana-4">🍌</span>
+              <span className="banana banana-5">🍌</span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Intro overlay */}
       {screen === 'intro' && (

@@ -10,12 +10,24 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
 
   // Watch for external trigger to show notification
   useEffect(() => {
-    if (triggerNotification && variant === 'disruption' && !showNotification) {
-      setShowNotification(true)
-      setIsVibrating(true)
-      setTimeout(() => setIsVibrating(false), 400)
+    if (triggerNotification && !showNotification) {
+      if (variant === 'disruption') {
+        setShowNotification(true)
+        setIsVibrating(true)
+        setTimeout(() => setIsVibrating(false), 400)
+      } else if (variant === 'discovery') {
+        // External trigger from typewriter effect
+        setScreenOn(true)
+        if (appVersion === 'personal') {
+          setShowPartnerNotification(true)
+        } else {
+          setShowNotification(true)
+          setIsVibrating(true)
+          setTimeout(() => setIsVibrating(false), 400)
+        }
+      }
     }
-  }, [triggerNotification, variant, showNotification])
+  }, [triggerNotification, variant, showNotification, appVersion])
 
   useEffect(() => {
     // Set current time based on variant
@@ -34,22 +46,9 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
 
     // Show notifications with delays
     if (variant === 'discovery') {
-      // Phone is dark, then notification arrives and screen lights up
-      const wakeUpTimer = setTimeout(() => {
-        setScreenOn(true) // Screen turns on
-        if (appVersion === 'personal') {
-          setShowPartnerNotification(true) // With Fabio's notification
-        } else {
-          // Neutral version: show SL notification directly
-          setShowNotification(true)
-          setIsVibrating(true)
-          setTimeout(() => setIsVibrating(false), 400)
-        }
-      }, 2000) // Wait 2 seconds before first notification
-
-      return () => {
-        clearTimeout(wakeUpTimer)
-      }
+      // Now controlled by external triggerNotification prop
+      // Phone starts dark, notification arrives when typewriter completes
+      return
     } else if (variant === 'morning') {
       // Morning: Phone is dark, then notification arrives and screen lights up
       const wakeUpTimer = setTimeout(() => {
