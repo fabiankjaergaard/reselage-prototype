@@ -2287,9 +2287,9 @@ body {
 .feature-list li::after {
   content: '';
   position: absolute;
-  left: 6px;
+  left: 6.5px;
   top: 50%;
-  transform: translateY(-50%) rotate(45deg);
+  transform: translateY(-60%) rotate(45deg);
   width: 4px;
   height: 8px;
   border: solid #fff;

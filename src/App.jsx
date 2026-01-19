@@ -61,14 +61,15 @@ function App() {
     const texts = {
       'discovery-lock': 'Det är kväll och Stina får en pushnotis från SL om en ny funktion...',
       'sl-app': 'Hon klickar på notisen och ser att SL har lagt till en ny funktion...',
+      'start': 'Stina blir nyfiken. Om SL faktiskt kan hålla koll åt henne – då kanske morgonen kan bli lite lättare.',
       'setup': 'Stina går igenom onboardingen och fyller i det SL behöver för att anpassa sig efter henne...',
       'morning-lock-screen': 'Det är morgon och Stina får sin första pushnotis från Reseläge...',
-      'lock-screen': 'Stina sitter på bussen och lyssnar på en podd när hon plötsligt får en notis...',
+      'lock-screen': 'Stina sitter på bussen och lyssnar på sitt favoritavsnitt med Mikael Vimmenby som gästar Framgångspodden när hon plötsligt får en notis...',
       'travel': planBActive
         ? 'Stina pustar ut och känner sig lugn igen. Skönt när någon tänker åt en...'
         : hasDisruption
           ? 'Stina får lite panik och klickar på notisen – men SL har redan en lösning...'
-          : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka...',
+          : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka... för inget kan ju gå fel med SL, eller hur?',
       'disruption': 'Hon ser den nya rutten och tycker den ser bra ut – framme i tid och gott om plats...',
       'travel-lock': 'Skönt att snabbt kunna se hur resan går utan att låsa upp mobilen...',
       'arrival': 'Det här var ju väldigt smidigt, tänker Stina. Framme i tid trots störningar – och sittplats hela vägen! 5/5 kreativa bananer!'
@@ -657,7 +658,7 @@ function App() {
           ]
         }
         return [
-          { text: 'Vi visar värde direkt - Stina förstår vad hon får innan hon ens börjat. Tydlighet skapar trygghet.', top: '380px', position: 'left', highlightClass: 'highlight-value-props' }
+          { text: 'Vi visar värde direkt - Stina förstår vad hon får innan hon ens börjat. Tydlighet skapar trygghet.', top: '440px', position: 'left', highlightClass: 'highlight-value-props' }
         ]
       default:
         return []

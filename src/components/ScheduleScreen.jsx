@@ -113,7 +113,7 @@ function ScheduleScreen({ tripData, onComplete, onBack }) {
         <div className="card-content">
           <ul className="feature-list">
             <li>Du får en notis på morgonen med status</li>
-            <li>Vi varnar dig om det finns störningar</li>
+            <li>Vi säger till vid störningar och hjälper dig hitta en ny rutt</li>
             <li>Du slipper kolla SL själv</li>
           </ul>
         </div>
