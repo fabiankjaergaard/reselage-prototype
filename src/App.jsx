@@ -18,13 +18,112 @@ import TabBar from './components/TabBar'
 import NightTransitionScreen from './components/NightTransitionScreen'
 import TravelLockScreen from './components/TravelLockScreen'
 import SMSView from './components/SMSView'
+import ResearchSlide from './components/ResearchSlide'
+import TitleSlide from './components/TitleSlide'
+import HookSlide from './components/HookSlide'
+import ProblemSlide from './components/ProblemSlide'
+import JourneySlide from './components/JourneySlide'
+import InsightSlide from './components/InsightSlide'
+import SolutionSlide from './components/SolutionSlide'
+import SummarySlide from './components/SummarySlide'
+import ComparisonSlide from './components/ComparisonSlide'
+import FeasibilitySlide from './components/FeasibilitySlide'
+import ValueSlide from './components/ValueSlide'
 
 function App() {
   // App version: 'personal' (with Fabio) or 'neutral' (standard)
   const [appVersion, setAppVersion] = useState('neutral')
 
+  // User test mode - shows tasks/scenarios instead of annotations
+  const [testMode, setTestMode] = useState(false)
+
   // Current screen state - start with intro
-  const [screen, setScreen] = useState('intro')
+  const [screen, setScreen] = useState('hook-slide')
+
+  // Test scenarios - phase-based, open-ended
+  const thinkAloud = 'Beskriv gärna vad du ser, vad du tror händer om du klickar någonstans, och om något känns oklart.'
+
+  const testScenarios = {
+    // FAS 1: Kom-igång (onboarding)
+    'discovery-lock': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'sl-app': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'start': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'setup': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'save-favorite': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'schedule': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'onboarding-complete': {
+      phase: '1. Kom-igång',
+      scenario: 'Du har fått en notis från SL om en ny funktion. Du öppnar appen för att se vad det handlar om. Ditt mål är att förstå vad funktionen gör och komma igång med den så att du kan använda den.',
+      followUp: thinkAloud
+    },
+    'night-transition': {
+      phase: '',
+      scenario: 'Natten passerar...',
+      followUp: ''
+    },
+    // FAS 2: Huvuduppgift (morgonrutin)
+    'morning-lock-screen': {
+      phase: '2. Huvuduppgift',
+      scenario: 'Det är morgon och du ska ta dig till jobbet. Använd funktionen för att genomföra din resa.',
+      followUp: thinkAloud
+    },
+    'travel': {
+      phase: '2. Huvuduppgift',
+      scenario: 'Det är morgon och du ska ta dig till jobbet. Använd funktionen för att genomföra din resa.',
+      followUp: thinkAloud
+    },
+    'travel-lock': {
+      phase: '2. Huvuduppgift',
+      scenario: 'Det är morgon och du ska ta dig till jobbet. Använd funktionen för att genomföra din resa.',
+      followUp: thinkAloud
+    },
+    // FAS 3: Problem (störning)
+    'lock-screen': {
+      phase: '3. Problem',
+      scenario: 'Det har blivit en störning på din linje och du riskerar att komma försent. Ditt mål är att hitta en ny rutt som fungerar för dig.',
+      followUp: thinkAloud
+    },
+    'working': {
+      phase: '3. Problem',
+      scenario: 'Det har blivit en störning på din linje och du riskerar att komma försent. Ditt mål är att hitta en ny rutt som fungerar för dig.',
+      followUp: thinkAloud
+    },
+    'disruption': {
+      phase: '3. Problem',
+      scenario: 'Det har blivit en störning på din linje och du riskerar att komma försent. Ditt mål är att hitta en ny rutt som fungerar för dig.',
+      followUp: thinkAloud
+    },
+    // FAS 4: Avslut
+    'arrival': {
+      phase: '4. Avslut',
+      scenario: 'Du har kommit fram. Hur upplevde du resan?',
+      followUp: '• Är det här något du hade kunnat tänka dig att använda i verkligheten? Varför/varför inte?\n• Saknade du något?\n• Var det något i flödet som kändes oklart eller extra bra?'
+    }
+  }
 
   // Track where map was opened from (for back navigation)
   const [mapReturnScreen, setMapReturnScreen] = useState('travel')
@@ -55,6 +154,7 @@ function App() {
   const [typedText, setTypedText] = useState('')
   const [typingComplete, setTypingComplete] = useState(false)
   const [narrationHidden, setNarrationHidden] = useState(false)
+  const [showArrivalContinue, setShowArrivalContinue] = useState(false)
 
   // Narration texts for different screens (function to allow state-based text)
   const getNarrationText = (screenName) => {
@@ -126,6 +226,18 @@ function App() {
     }
   }, [screen])
 
+  // Show continue button after bananas animate on arrival screen
+  useEffect(() => {
+    if (screen === 'arrival' && typingComplete) {
+      const timer = setTimeout(() => {
+        setShowArrivalContinue(true)
+      }, 1500) // Wait for bananas to animate in
+      return () => clearTimeout(timer)
+    } else {
+      setShowArrivalContinue(false)
+    }
+  }, [screen, typingComplete])
+
   // Navigation functions
   const navigate = (newScreen) => {
     setScreen(newScreen)
@@ -155,6 +267,22 @@ function App() {
 
   const closeMap = () => {
     navigate(mapReturnScreen)
+  }
+
+  // Start user test mode - start from discovery lock screen with notification
+  const startTestMode = () => {
+    setTestMode(true)
+    setSavedTrip(null)
+    setSetupTripData(null)
+    setHasDisruption(false)
+    setPlanBActive(false)
+    navigate('discovery-lock')
+  }
+
+  // Exit test mode
+  const exitTestMode = () => {
+    setTestMode(false)
+    navigate('hook-slide')
   }
 
   // Setup flow functions
@@ -367,7 +495,7 @@ function App() {
         return (
           <SLAppMockup
             onOpenReselage={() => navigate('start')}
-            highlightReselage={typingComplete}
+            highlightReselage={!testMode && typingComplete}
           />
         )
       case 'start':
@@ -675,8 +803,8 @@ function App() {
       )}
 
       <div className={`app-container ${showSidebar ? 'with-sidebar' : ''}`} onClick={handleBackgroundClick}>
-      {/* Annotations on the left */}
-      {annotations.filter(a => a.position !== 'right').length > 0 && (
+      {/* Annotations on the left - hidden in test mode */}
+      {!testMode && annotations.filter(a => a.position !== 'right').length > 0 && (
         <div className="annotations-container annotations-left">
           {annotations.filter(a => a.position !== 'right').map((annotation, index) => (
             <Annotation
@@ -691,8 +819,8 @@ function App() {
         </div>
       )}
 
-      {/* Annotations on the right */}
-      {annotations.filter(a => a.position === 'right').length > 0 && (
+      {/* Annotations on the right - hidden in test mode */}
+      {!testMode && annotations.filter(a => a.position === 'right').length > 0 && (
         <div className="annotations-container annotations-right-side">
           {annotations.filter(a => a.position === 'right').map((annotation, index) => (
             <Annotation
@@ -713,21 +841,73 @@ function App() {
         )}
       </div>
 
-      {/* Narration panel for screens with narration */}
-      {getNarrationText(screen) && (
+      {/* Test mode scenario panel */}
+      {testMode && testScenarios[screen] && testScenarios[screen].phase && !(screen === 'start' && savedTrip) && !(screen === 'travel' && hasDisruption) && (
+        <div className="test-scenario-panel">
+          <div className="test-scenario-header">
+            <span className="test-phase">{testScenarios[screen].phase}</span>
+            <button className="test-exit-btn" onClick={exitTestMode}>
+              Avsluta ×
+            </button>
+          </div>
+          <p className="test-scenario">{testScenarios[screen].scenario}</p>
+          {testScenarios[screen].followUp && (
+            <p className="test-followup">{testScenarios[screen].followUp}</p>
+          )}
+        </div>
+      )}
+
+      {/* Test mode scenario for travel screen with disruption (show problem scenario) */}
+      {testMode && screen === 'travel' && hasDisruption && (
+        <div className="test-scenario-panel">
+          <div className="test-scenario-header">
+            <span className="test-phase">3. Problem</span>
+            <button className="test-exit-btn" onClick={exitTestMode}>
+              Avsluta ×
+            </button>
+          </div>
+          <p className="test-scenario">Det har blivit en störning på din linje och du riskerar att komma försent. Ditt mål är att hitta en ny rutt som fungerar för dig.</p>
+          <p className="test-followup">{thinkAloud}</p>
+        </div>
+      )}
+
+      {/* Test mode scenario for start screen when user has saved trip (morning flow) */}
+      {testMode && screen === 'start' && savedTrip && (
+        <div className="test-scenario-panel">
+          <div className="test-scenario-header">
+            <span className="test-phase">2. Huvuduppgift</span>
+            <button className="test-exit-btn" onClick={exitTestMode}>
+              Avsluta ×
+            </button>
+          </div>
+          <p className="test-scenario">Det är morgon och du ska ta dig till jobbet. Använd funktionen för att genomföra din resa.</p>
+          <p className="test-task"><strong>Extra:</strong> Om du vill se var din buss är just nu, hur hade du gått tillväga då?</p>
+          <p className="test-followup">Beskriv gärna vad du ser, vad du tror händer om du klickar någonstans, och om något känns oklart.</p>
+        </div>
+      )}
+
+      {/* Narration panel for screens with narration - hidden in test mode */}
+      {!testMode && getNarrationText(screen) && (
         <div className={`narration-panel ${narrationHidden ? 'hidden' : ''}`}>
           <p className="narration-text">
             {typedText}
             {!typingComplete && <span className="typing-cursor">|</span>}
           </p>
           {screen === 'arrival' && typingComplete && (
-            <div className="banana-rating">
-              <span className="banana banana-1">🍌</span>
-              <span className="banana banana-2">🍌</span>
-              <span className="banana banana-3">🍌</span>
-              <span className="banana banana-4">🍌</span>
-              <span className="banana banana-5">🍌</span>
-            </div>
+            <>
+              <div className="banana-rating">
+                <span className="banana banana-1">🍌</span>
+                <span className="banana banana-2">🍌</span>
+                <span className="banana banana-3">🍌</span>
+                <span className="banana banana-4">🍌</span>
+                <span className="banana banana-5">🍌</span>
+              </div>
+              {showArrivalContinue && (
+                <button className="arrival-continue-btn" onClick={() => navigate('summary')}>
+                  Avsluta prototyp →
+                </button>
+              )}
+            </>
           )}
         </div>
       )}
@@ -769,11 +949,97 @@ function App() {
               </button>
             </div>
 
-            <button className="intro-start-btn" onClick={() => navigate('discovery-lock')}>
+            <button className="intro-start-btn" onClick={() => navigate('research')}>
               Starta koncept
             </button>
           </div>
         </div>
+      )}
+
+      {/* Hook slide */}
+      {screen === 'hook-slide' && (
+        <HookSlide
+          onContinue={() => navigate('persona')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+          onStartUserTest={startTestMode}
+        />
+      )}
+
+      {/* Persona slide */}
+      {screen === 'persona' && (
+        <ResearchSlide
+          onContinue={() => navigate('problem')}
+          onBack={() => navigate('hook-slide')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Problem slide */}
+      {screen === 'problem' && (
+        <ProblemSlide
+          onContinue={() => navigate('journey')}
+          onBack={() => navigate('persona')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Journey slide */}
+      {screen === 'journey' && (
+        <JourneySlide
+          onContinue={() => navigate('insight')}
+          onBack={() => navigate('problem')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Insight slide */}
+      {screen === 'insight' && (
+        <InsightSlide
+          onContinue={() => navigate('solution')}
+          onBack={() => navigate('journey')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Solution slide */}
+      {screen === 'solution' && (
+        <SolutionSlide
+          onContinue={() => navigate('discovery-lock')}
+          onBack={() => navigate('insight')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Summary slide (after prototype) */}
+      {screen === 'summary' && (
+        <SummarySlide
+          onContinue={() => navigate('comparison')}
+          onBack={() => navigate('arrival')}
+        />
+      )}
+
+      {/* Comparison slide (before/after) */}
+      {screen === 'comparison' && (
+        <ComparisonSlide
+          onContinue={() => navigate('feasibility')}
+          onBack={() => navigate('summary')}
+        />
+      )}
+
+      {/* Feasibility slide */}
+      {screen === 'feasibility' && (
+        <FeasibilitySlide
+          onContinue={() => navigate('value')}
+          onBack={() => navigate('comparison')}
+        />
+      )}
+
+      {/* Value/Business case slide */}
+      {screen === 'value' && (
+        <ValueSlide
+          onContinue={() => navigate('hook-slide')}
+          onBack={() => navigate('feasibility')}
+        />
       )}
 
       {showSidebar && (
