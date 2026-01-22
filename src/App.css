@@ -6439,6 +6439,7 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   display: flex;
   gap: 12px;
   margin-top: auto;
+  width: 100%;
 }
 
 .slide-btn {
@@ -7462,6 +7463,7 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 .comparison-slide .slide-actions {
   margin-top: auto;
   padding-top: clamp(16px, 2vw, 24px);
+  width: 100%;
 }
 
 /* Horizontal Timeline Comparison */

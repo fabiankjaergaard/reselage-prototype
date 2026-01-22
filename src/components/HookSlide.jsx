@@ -1,21 +1,6 @@
-function HookSlide({ onContinue, onSkipToPrototype, onStartUserTest, onSkipToAfterPrototype }) {
+function HookSlide({ onContinue }) {
   return (
     <div className="slide-wrapper">
-      <div className="skip-buttons-container">
-        <button className="skip-to-prototype" onClick={onSkipToPrototype}>
-          Hoppa till prototyp →
-        </button>
-        {onStartUserTest && (
-          <button className="start-user-test" onClick={onStartUserTest}>
-            Användartest →
-          </button>
-        )}
-        {onSkipToAfterPrototype && (
-          <button className="start-user-test" onClick={onSkipToAfterPrototype}>
-            Hoppa till efter prototyp →
-          </button>
-        )}
-      </div>
 
       <div className="slide-card hook-slide">
 
