@@ -1,4 +1,4 @@
-function HookSlide({ onContinue, onSkipToPrototype, onStartUserTest }) {
+function HookSlide({ onContinue, onSkipToPrototype, onStartUserTest, onSkipToAfterPrototype }) {
   return (
     <div className="slide-wrapper">
       <div className="skip-buttons-container">
@@ -8,6 +8,11 @@ function HookSlide({ onContinue, onSkipToPrototype, onStartUserTest }) {
         {onStartUserTest && (
           <button className="start-user-test" onClick={onStartUserTest}>
             Användartest →
+          </button>
+        )}
+        {onSkipToAfterPrototype && (
+          <button className="start-user-test" onClick={onSkipToAfterPrototype}>
+            Hoppa till efter prototyp →
           </button>
         )}
       </div>

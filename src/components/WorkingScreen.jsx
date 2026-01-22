@@ -37,7 +37,7 @@ function WorkingScreen({ onSolutionReady }) {
           <img src="/lotus-flower-transparent.gif" alt="Lugn" className="working-lotus" />
         </div>
 
-        <h1 className="working-title">Ingen panik!</h1>
+        <h1 className="working-title">Vi löser det</h1>
         <p className="working-subtitle">Vi hittar en alternativ väg åt dig</p>
         <p className="working-subtitle-secondary">Du kommer fortfarande hinna fram i tid</p>
 

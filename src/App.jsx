@@ -7,6 +7,7 @@ import SaveFavoriteScreen from './components/SaveFavoriteScreen'
 import ScheduleScreen from './components/ScheduleScreen'
 import OnboardingCompleteScreen from './components/OnboardingCompleteScreen'
 import TravelModeScreen from './components/TravelModeScreen'
+import TravelModeScreenAlt from './components/TravelModeScreenAlt'
 import LockScreen from './components/LockScreen'
 import WorkingScreen from './components/WorkingScreen'
 import DisruptionScreen from './components/DisruptionScreen'
@@ -16,7 +17,9 @@ import MapView from './components/MapView'
 import Annotation from './components/Annotation'
 import TabBar from './components/TabBar'
 import NightTransitionScreen from './components/NightTransitionScreen'
+import CalmJourneyScreen from './components/CalmJourneyScreen'
 import TravelLockScreen from './components/TravelLockScreen'
+import TravelLockScreenWidget from './components/TravelLockScreenWidget'
 import SMSView from './components/SMSView'
 import ResearchSlide from './components/ResearchSlide'
 import TitleSlide from './components/TitleSlide'
@@ -29,6 +32,11 @@ import SummarySlide from './components/SummarySlide'
 import ComparisonSlide from './components/ComparisonSlide'
 import FeasibilitySlide from './components/FeasibilitySlide'
 import ValueSlide from './components/ValueSlide'
+import PreferenceConflictScreen from './components/PreferenceConflictScreen'
+import ValidationSlide from './components/ValidationSlide'
+import IterationBeforeAfterSlide from './components/IterationBeforeAfterSlide'
+import IterationBeforeAfterSlide2 from './components/IterationBeforeAfterSlide2'
+import ValidationSlide2 from './components/ValidationSlide2'
 
 function App() {
   // App version: 'personal' (with Fabio) or 'neutral' (standard)
@@ -140,6 +148,7 @@ function App() {
   // Travel state
   const [hasDisruption, setHasDisruption] = useState(false)
   const [planBActive, setPlanBActive] = useState(false)
+  const [travelModeVersion, setTravelModeVersion] = useState('default') // 'default' or 'progress'
 
   // Morning notification state
   const [showMorningToast, setShowMorningToast] = useState(false)
@@ -149,6 +158,61 @@ function App() {
 
   // Trigger notification on lock screen (for demo click)
   const [triggerLockNotification, setTriggerLockNotification] = useState(false)
+
+  // Scenario showcase mode
+  const [scenarioMode, setScenarioMode] = useState(null)
+  const [scenarioScreen, setScenarioScreen] = useState(null)
+  const [scenarioTypedText, setScenarioTypedText] = useState('')
+  const [scenarioTypingComplete, setScenarioTypingComplete] = useState(false)
+  const [scenarioReturnScreen, setScenarioReturnScreen] = useState('start')
+  const [scenarioReturnState, setScenarioReturnState] = useState(null)
+
+  // Scenario definitions
+  const scenarios = {
+    'preference-conflict': {
+      title: 'Preferenskonflikt',
+      description: 'Ibland finns det såklart ingen rutt som uppfyller alla Stinas preferenser. Istället för att öka mental belastning i onboarding genom att "tvinga" henne rangordna – frågar vi i stunden, när det faktiskt spelar roll.',
+      screen: 'preference-conflict'
+    }
+  }
+
+  // Start scenario showcase
+  const startScenario = (scenarioId) => {
+    const scenario = scenarios[scenarioId]
+    if (scenario) {
+      // Save current state to return to
+      setScenarioReturnScreen(screen)
+      setScenarioReturnState({ hasDisruption, planBActive })
+
+      setScenarioMode(scenarioId)
+      setScenarioScreen(scenario.screen)
+      setScenarioTypedText('')
+      setScenarioTypingComplete(false)
+      navigate(scenario.screen)
+    }
+  }
+
+  // Exit scenario mode
+  const exitScenarioMode = () => {
+    const returnScreen = scenarioReturnScreen
+    const returnState = scenarioReturnState
+
+    setScenarioMode(null)
+    setScenarioScreen(null)
+    setScenarioTypedText('')
+    setScenarioTypingComplete(false)
+
+    // Restore state based on where we came from
+    if (returnState) {
+      setHasDisruption(returnState.hasDisruption)
+      setPlanBActive(returnState.planBActive)
+    } else {
+      setHasDisruption(false)
+      setPlanBActive(false)
+    }
+
+    navigate(returnScreen)
+  }
 
   // Typewriter state for narration
   const [typedText, setTypedText] = useState('')
@@ -166,12 +230,15 @@ function App() {
       'morning-lock-screen': 'Det är morgon och Stina får sin första pushnotis från Reseläge...',
       'lock-screen': 'Stina sitter på bussen och lyssnar på sitt favoritavsnitt med Mikael Vimmenby som gästar Framgångspodden när hon plötsligt får en notis...',
       'travel': planBActive
-        ? 'Stina pustar ut och känner sig lugn igen. Skönt när någon tänker åt en...'
+        ? 'Stina valde snabbt en alternativ rutt som passade hennes preferenser – framme i tid och gott om plats. GPS-vyn visar exakt var hon ska gå och när bussen kommer. Hon känner sig lugn och i full kontroll.'
         : hasDisruption
           ? 'Stina får lite panik och klickar på notisen – men SL har redan en lösning...'
           : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka... för inget kan ju gå fel med SL, eller hur?',
       'disruption': 'Hon ser den nya rutten och tycker den ser bra ut – framme i tid och gott om plats...',
       'travel-lock': 'Skönt att snabbt kunna se hur resan går utan att låsa upp mobilen...',
+      'travel-lock-widget': 'GPS-kartan anpassar sig automatiskt efter var Stina är – alltid rätt information i rätt stund. Hon behöver inte ens öppna appen.',
+      'calm-journey': 'Stina sitter bekvämt på bussen och känner sig helt i kontroll. Med lite tid över scrollar hon igenom nyheterna – och plötsligt ser hon något bekant...',
+      'arrival-lock': 'Stina kommer fram till kontoret i tid. En kort stund senare får hon en notis...',
       'arrival': 'Det här var ju väldigt smidigt, tänker Stina. Framme i tid trots störningar – och sittplats hela vägen! 5/5 kreativa bananer!'
     }
     return texts[screenName]
@@ -189,7 +256,8 @@ function App() {
     nextStop: 'Slussen',
     nextStopTime: '08:24',
     occupancy: notificationScenario === 'warning' ? 'high' : 'low',
-    delayMinutes: hasDisruption ? 6 : 0
+    delayMinutes: hasDisruption ? 6 : 0,
+    vehicleType: planBActive ? 'bus' : 'metro'
   }
 
   // Don't auto-show toast - user already saw notification on lock screen
@@ -225,6 +293,30 @@ function App() {
       return () => clearInterval(interval)
     }
   }, [screen])
+
+  // Typewriter effect for scenario descriptions
+  useEffect(() => {
+    if (scenarioMode && scenarios[scenarioMode]) {
+      const scenarioText = scenarios[scenarioMode].description
+      setScenarioTypedText('')
+      setScenarioTypingComplete(false)
+
+      let index = 0
+      const interval = setInterval(() => {
+        if (index < scenarioText.length) {
+          setScenarioTypedText(scenarioText.slice(0, index + 1))
+          index++
+        } else {
+          clearInterval(interval)
+          setTimeout(() => {
+            setScenarioTypingComplete(true)
+          }, 500)
+        }
+      }, 40) // Slightly faster than narration
+
+      return () => clearInterval(interval)
+    }
+  }, [scenarioMode])
 
   // Show continue button after bananas animate on arrival screen
   useEffect(() => {
@@ -318,6 +410,11 @@ function App() {
     navigate('morning-lock-screen')
   }
 
+  const handleCalmJourneyComplete = () => {
+    // After calm journey lock screen, go to arrival
+    navigate('arrival-lock')
+  }
+
   const handleMorningNotificationTap = () => {
     setShowMorningToast(false)
     navigate('start')
@@ -351,13 +448,17 @@ function App() {
     navigate('travel')
   }
 
+  const confirmPlanB = () => {
+    navigate('calm-journey')
+  }
+
   const returnToTravel = () => {
     navigate('travel')
   }
 
   const endTravelMode = () => {
     if (planBActive || hasDisruption) {
-      navigate('arrival')
+      navigate('arrival-lock')
     } else {
       setHasDisruption(false)
       setPlanBActive(false)
@@ -372,6 +473,10 @@ function App() {
   }
 
   const completeTrip = () => {
+    navigate('arrival-lock')
+  }
+
+  const handleArrivalNotificationTap = () => {
     navigate('arrival')
   }
 
@@ -447,24 +552,52 @@ function App() {
     // Ensure saved trip exists for morning flow
     const tripData = { from: 'Vasagatan 12, Stockholm', to: 'Kontoret, Medborgarplatsen', arrivalTime: '09:00', name: 'Till jobbet', schedule: { days: ['mon', 'tue', 'wed', 'thu', 'fri'] } }
     setSavedTrip(tripData)
-    setHasDisruption(false)
-    setPlanBActive(false)
 
     switch (stepId) {
       case 0: // Morgonnotis
+        setHasDisruption(false)
+        setPlanBActive(false)
         navigate('morning-lock-screen')
         break
       case 1: // Översikt
+        setHasDisruption(false)
+        setPlanBActive(false)
         navigate('start')
         break
       case 2: // Under resan
+        setHasDisruption(false)
+        setPlanBActive(false)
         navigate('travel')
         break
-      case 3: // Låsskärm med widget
+      case 3: // Låsskärm
+        setHasDisruption(false)
+        setPlanBActive(false)
         navigate('travel-lock')
         break
-      case 4: // Framme
-        navigate('arrival')
+      case 4: // Störning
+        setHasDisruption(true)
+        setPlanBActive(false)
+        navigate('lock-screen')
+        break
+      case 5: // Välj rutt (DisruptionScreen)
+        setHasDisruption(true)
+        setPlanBActive(false)
+        navigate('disruption')
+        break
+      case 6: // Plan B
+        setHasDisruption(false)
+        setPlanBActive(true)
+        navigate('travel')
+        break
+      case 7: // På väg (calm journey on new route)
+        setHasDisruption(false)
+        setPlanBActive(true)
+        navigate('calm-journey')
+        break
+      case 8: // Framme
+        setHasDisruption(false)
+        setPlanBActive(true)
+        navigate('arrival-lock')
         break
       default:
         break
@@ -544,7 +677,19 @@ function App() {
       case 'night-transition':
         return null // Rendered as full-screen overlay instead
       case 'travel':
-        return (
+        return travelModeVersion === 'progress' ? (
+          <TravelModeScreenAlt
+            travelData={travelData}
+            hasDisruption={hasDisruption}
+            planBActive={planBActive}
+            onSimulateDisruption={simulateDisruption}
+            onShowPlanB={() => navigate('working')}
+            onEndTravelMode={endTravelMode}
+            onCompleteTrip={completeTrip}
+            onShowMap={() => showMap('travel', planBActive ? 'planb' : 'traveling')}
+            onLockPhone={() => navigate('travel-lock')}
+          />
+        ) : (
           <TravelModeScreen
             travelData={travelData}
             hasDisruption={hasDisruption}
@@ -565,6 +710,13 @@ function App() {
             appVersion={appVersion}
             onUnlock={() => navigate('travel')}
             onNotificationTap={handleNotificationTap}
+          />
+        )
+      case 'travel-lock-widget':
+        return (
+          <TravelLockScreenWidget
+            planBActive={planBActive}
+            onUnlock={() => navigate('travel')}
           />
         )
       case 'map':
@@ -594,6 +746,14 @@ function App() {
             onNotificationTap={handleMorningNotificationTap}
           />
         )
+      case 'arrival-lock':
+        return (
+          <LockScreen
+            variant="arrival"
+            appVersion={appVersion}
+            onNotificationTap={handleArrivalNotificationTap}
+          />
+        )
       case 'working':
         return (
           <WorkingScreen
@@ -612,9 +772,15 @@ function App() {
         return (
           <PlanBScreen
             travelData={travelData}
-            onConfirm={returnToTravel}
-            onBack={returnToTravel}
+            onConfirm={confirmPlanB}
+            onBack={() => navigate('disruption')}
             onShowMap={() => showMap('planb', 'planb')}
+          />
+        )
+      case 'calm-journey':
+        return (
+          <CalmJourneyScreen
+            onComplete={handleCalmJourneyComplete}
           />
         )
       case 'arrival':
@@ -623,6 +789,16 @@ function App() {
             onSave={finishTrip}
             onSkip={finishTrip}
             hasFavoriteRoute={savedTrip !== null}
+          />
+        )
+      case 'preference-conflict':
+        return (
+          <PreferenceConflictScreen
+            onChooseOption={(option) => {
+              // User chose a preference, continue to travel
+              navigate('travel')
+            }}
+            onBack={() => navigate('start')}
           />
         )
       default:
@@ -674,16 +850,20 @@ function App() {
       case 'start':
         return savedTrip ? 1 : null
       case 'travel':
-        return 2
+        // Travel with Plan B active = "Plan B" step, otherwise "Under resan"
+        return planBActive ? 6 : 2
+      case 'travel-lock':
+        return 3
       case 'lock-screen':
       case 'working':
-      case 'disruption':
-      case 'planb':
-        return 3
-      case 'travel-lock':
         return 4
-      case 'arrival':
+      case 'disruption':
         return 5
+      case 'calm-journey':
+        return 7
+      case 'arrival-lock':
+      case 'arrival':
+        return 8
       default:
         return null
     }
@@ -716,10 +896,34 @@ function App() {
     { id: 0, label: 'Morgonnotis' },
     { id: 1, label: 'Översikt' },
     { id: 2, label: 'Under resan' },
-    { id: 3, label: 'Störning' },
-    { id: 4, label: 'Låsskärm' },
-    { id: 5, label: 'Framme' }
+    { id: 3, label: 'Låsskärm' },
+    { id: 4, label: 'Störning' },
+    { id: 5, label: 'Välj rutt' },
+    { id: 6, label: 'Plan B' },
+    { id: 7, label: 'På väg' },
+    { id: 8, label: 'Framme' }
   ]
+
+  // Presentation slides for navigation
+  const presentationSlides = [
+    { id: 'hook-slide', label: 'Hook', section: 'Fas 1: Problem' },
+    { id: 'persona', label: 'Persona', section: 'Fas 1: Problem' },
+    { id: 'problem', label: 'Problem', section: 'Fas 1: Problem' },
+    { id: 'journey', label: 'Kundresa', section: 'Fas 1: Problem' },
+    { id: 'insight', label: 'Insikt', section: 'Fas 1: Problem' },
+    { id: 'solution', label: 'Lösning', section: 'Fas 2: Lösning' },
+    { id: 'summary', label: 'Sammanfattning', section: 'Fas 3: Bevis' },
+    { id: 'comparison', label: 'Före/Efter', section: 'Fas 3: Bevis' },
+    { id: 'feasibility', label: 'Genomförbarhet', section: 'Fas 3: Bevis' },
+    { id: 'value', label: 'Affärsvärde', section: 'Fas 3: Bevis' },
+    { id: 'validation', label: 'Validering', section: 'Fas 3: Bevis' },
+    { id: 'iteration-comparison', label: 'Iteration 1', section: 'Fas 3: Bevis' },
+    { id: 'iteration-comparison2', label: 'Iteration 2', section: 'Fas 3: Bevis' },
+    { id: 'validation2', label: 'Resultat', section: 'Fas 3: Bevis' }
+  ]
+
+  const isPresentationSlide = presentationSlides.some(slide => slide.id === screen)
+  const currentPresentationIndex = presentationSlides.findIndex(slide => slide.id === screen)
 
   const currentFlow = discoveryStep !== null ? 'discovery' : (onboardingStep !== null ? 'onboarding' : (morningStep !== null ? 'morning' : null))
   const showSidebar = currentFlow !== null
@@ -772,6 +976,8 @@ function App() {
         return []
       case 'travel':
         return []
+      case 'travel-lock-widget':
+        return []
       case 'disruption':
         return [
           { text: 'Tydlig jämförelse – Stina ser direkt skillnaden mellan att stanna kvar vs. ta alternativet. Enkel beslutssituation.', top: '420px', position: 'left', highlightClass: 'highlight-disruption-recommended' }
@@ -801,6 +1007,7 @@ function App() {
       {screen === 'night-transition' && (
         <NightTransitionScreen onComplete={handleNightTransitionComplete} />
       )}
+
 
       <div className={`app-container ${showSidebar ? 'with-sidebar' : ''}`} onClick={handleBackgroundClick}>
       {/* Annotations on the left - hidden in test mode */}
@@ -836,7 +1043,7 @@ function App() {
       )}
       <div className="phone-frame" ref={phoneContentRef}>
         {renderScreen()}
-        {!['intro', 'discovery-lock', 'sms-view', 'sl-app', 'lock-screen', 'morning-lock-screen', 'map', 'working', 'night-transition', 'travel-lock'].includes(screen) && (
+        {!['intro', 'discovery-lock', 'sms-view', 'sl-app', 'lock-screen', 'morning-lock-screen', 'map', 'working', 'night-transition', 'travel-lock', 'travel-lock-widget', 'arrival-lock', 'preference-conflict', 'calm-journey'].includes(screen) && (
           <TabBar activeTab="resa" />
         )}
       </div>
@@ -912,6 +1119,21 @@ function App() {
         </div>
       )}
 
+      {/* Scenario showcase panel - narration style */}
+      {scenarioMode && scenarios[scenarioMode] && (
+        <div className="narration-panel scenario-narration">
+          <p className="narration-text">
+            {scenarioTypedText}
+            {!scenarioTypingComplete && <span className="typing-cursor">|</span>}
+          </p>
+          {scenarioTypingComplete && (
+            <button className="scenario-back-btn" onClick={exitScenarioMode}>
+              ← Tillbaka till prototyp
+            </button>
+          )}
+        </div>
+      )}
+
       {/* Intro overlay */}
       {screen === 'intro' && (
         <div className="intro-overlay">
@@ -962,6 +1184,7 @@ function App() {
           onContinue={() => navigate('persona')}
           onSkipToPrototype={() => navigate('discovery-lock')}
           onStartUserTest={startTestMode}
+          onSkipToAfterPrototype={() => navigate('summary')}
         />
       )}
 
@@ -1037,8 +1260,40 @@ function App() {
       {/* Value/Business case slide */}
       {screen === 'value' && (
         <ValueSlide
-          onContinue={() => navigate('hook-slide')}
+          onContinue={() => navigate('validation')}
           onBack={() => navigate('feasibility')}
+        />
+      )}
+
+      {/* Validation slide */}
+      {screen === 'validation' && (
+        <ValidationSlide
+          onContinue={() => navigate('iteration-comparison')}
+          onBack={() => navigate('value')}
+        />
+      )}
+
+      {/* Iteration before/after comparison */}
+      {screen === 'iteration-comparison' && (
+        <IterationBeforeAfterSlide
+          onContinue={() => navigate('iteration-comparison2')}
+          onBack={() => navigate('validation')}
+        />
+      )}
+
+      {/* Iteration before/after comparison 2 - GPS view */}
+      {screen === 'iteration-comparison2' && (
+        <IterationBeforeAfterSlide2
+          onContinue={() => navigate('validation2')}
+          onBack={() => navigate('iteration-comparison')}
+        />
+      )}
+
+      {/* Validation slide 2 - Quote */}
+      {screen === 'validation2' && (
+        <ValidationSlide2
+          onContinue={() => navigate('hook-slide')}
+          onBack={() => navigate('iteration-comparison2')}
         />
       )}
 
@@ -1131,20 +1386,93 @@ function App() {
             )}
           </div>
 
-          {/* Demo actions - only on travel screen */}
-          {screen === 'travel' && (
+          {/* Demo actions - only on travel screen without disruption */}
+          {screen === 'travel' && !scenarioMode && !hasDisruption && !planBActive && (
             <div className="sidebar-demo-actions">
               <span className="sidebar-demo-label">Demo</span>
-              <button className="sidebar-demo-btn" onClick={() => navigate('travel-lock')}>
-                Lås telefonen
+              <button className="sidebar-demo-btn" onClick={simulateDisruption}>
+                Simulera störning
               </button>
-              {!hasDisruption && !planBActive && (
-                <button className="sidebar-demo-btn" onClick={simulateDisruption}>
-                  Simulera störning
-                </button>
-              )}
             </div>
           )}
+
+          {/* Demo actions - on travel screen with disruption */}
+          {screen === 'travel' && !scenarioMode && hasDisruption && !planBActive && (
+            <div className="sidebar-demo-actions">
+              <span className="sidebar-demo-label">Demo</span>
+              <button className="sidebar-demo-btn" onClick={() => startScenario('preference-conflict')}>
+                Simulera preferenskonflikt
+              </button>
+            </div>
+          )}
+
+          {/* Scenarios section - on start screen with saved trip */}
+          {screen === 'start' && savedTrip && !scenarioMode && (
+            <div className="sidebar-scenarios">
+              <span className="sidebar-demo-label">Scenarier</span>
+              <button className="sidebar-scenario-btn" onClick={() => startScenario('preference-conflict')}>
+                Preferenskonflikt
+              </button>
+            </div>
+          )}
+
+          {/* Toggle travel mode version - on travel screen with Plan B active */}
+          {screen === 'travel' && !scenarioMode && planBActive && (
+            <div className="sidebar-demo-actions">
+              <span className="sidebar-demo-label">Alternativ design</span>
+              <button
+                className="sidebar-demo-btn"
+                onClick={() => navigate('travel-lock-widget')}
+              >
+                Visa widget-låsskärm
+              </button>
+            </div>
+          )}
+
+          {/* Toggle lock screen widget - on travel-lock screen */}
+          {screen === 'travel-lock' && !scenarioMode && (
+            <div className="sidebar-demo-actions">
+              <span className="sidebar-demo-label">Alternativ design</span>
+              <button
+                className="sidebar-demo-btn"
+                onClick={() => navigate('travel-lock-widget')}
+              >
+                Visa reseöversikt (widget)
+              </button>
+            </div>
+          )}
+
+          {/* Back from widget to normal lock - on travel-lock-widget screen */}
+          {screen === 'travel-lock-widget' && !scenarioMode && (
+            <div className="sidebar-demo-actions">
+              <span className="sidebar-demo-label">Alternativ design</span>
+              <button
+                className="sidebar-demo-btn"
+                onClick={() => navigate('travel-lock')}
+              >
+                Visa standardvy
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Presentation sidebar */}
+      {isPresentationSlide && (
+        <div className="presentation-sidebar">
+          <div className="presentation-sidebar-title">Presentation</div>
+          <div className="presentation-slides-list">
+            {presentationSlides.map((slide, index) => (
+              <button
+                key={slide.id}
+                className={`presentation-slide-item ${screen === slide.id ? 'active' : ''} ${index < currentPresentationIndex ? 'completed' : ''}`}
+                onClick={() => navigate(slide.id)}
+              >
+                <span className="presentation-slide-number">{index + 1}</span>
+                <span className="presentation-slide-label">{slide.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -63,7 +63,8 @@ function ArrivalScreen({ onSave, onSkip, hasFavoriteRoute }) {
         </div>
       </div>
 
-      
+      <p className="arrival-thanks">Tack för att du reser med SL</p>
+
       <div className="spacer"></div>
 
       <div className="btn-container">

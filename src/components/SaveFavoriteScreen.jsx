@@ -90,7 +90,7 @@ function SaveFavoriteScreen({ tripData, onNext, onBack }) {
             <label className="preference-toggle">
               <div className="preference-info">
                 <span className="preference-label">Föredra sittplats</span>
-                <span className="preference-desc">Välj rutter med lägre beläggning</span>
+                <span className="preference-desc">Välj rutter med mer plats</span>
               </div>
               <div className={`toggle ${preferSeat ? 'toggle-active' : ''}`} onClick={() => setPreferSeat(!preferSeat)}>
                 <div className="toggle-knob"></div>

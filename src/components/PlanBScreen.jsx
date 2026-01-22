@@ -1,18 +1,7 @@
+import { useState } from 'react'
+
 function PlanBScreen({ travelData, onConfirm, onBack, onShowMap }) {
-  const steps = [
-    {
-      title: 'Gå till hållplats B',
-      detail: '2 minuters promenad österut'
-    },
-    {
-      title: 'Ta buss 172',
-      detail: 'Avgår kl 08:15'
-    },
-    {
-      title: 'Kliv av vid Medborgarplatsen',
-      detail: 'Ankomst ca 08:48'
-    }
-  ]
+  const [showAllSteps, setShowAllSteps] = useState(false)
 
   return (
     <div className="screen">
@@ -31,26 +20,78 @@ function PlanBScreen({ travelData, onConfirm, onBack, onShowMap }) {
         Se var din buss är
       </button>
 
-      <div className="card">
-        <div className="card-header">
-          <span className="card-title">Din nya rutt</span>
+      {/* Nästa steg + Visa hela rutten i samma kort */}
+      <div className="next-step-card">
+        <div className="next-step-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
+          </svg>
         </div>
-        <div className="step-list">
-          {steps.map((step, index) => (
-            <div key={index} className="step-item">
-              <div className="step-number">{index + 1}</div>
-              <div className="step-content">
-                <p className="step-title">{step.title}</p>
-                <p className="step-detail">{step.detail}</p>
+        <p className="next-step-label">Nästa steg</p>
+        <p className="next-step-action">Kliv av vid Slussen</p>
+        <p className="next-step-time">
+          <span className="time-label">Nästa hållplats</span>
+        </p>
+
+        {/* Toggle för hela rutten */}
+        <button
+          className="route-toggle-btn-inline"
+          onClick={() => setShowAllSteps(!showAllSteps)}
+        >
+          <span>{showAllSteps ? 'Dölj hela rutten' : 'Visa hela rutten'}</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className={`route-toggle-icon ${showAllSteps ? 'rotated' : ''}`}
+          >
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+
+        {showAllSteps && (
+          <div className="route-steps-list-inline">
+            <div className="route-step route-step-active">
+              <div className="route-step-number">1</div>
+              <div className="route-step-content">
+                <p className="route-step-title">Kliv av vid Slussen</p>
+                <p className="route-step-detail">Nästa hållplats</p>
               </div>
             </div>
-          ))}
-        </div>
+
+            <div className="route-step">
+              <div className="route-step-number">2</div>
+              <div className="route-step-content">
+                <p className="route-step-title">Gå till Hållplats B</p>
+                <p className="route-step-detail">2 min gång österut</p>
+              </div>
+            </div>
+
+            <div className="route-step">
+              <div className="route-step-number">3</div>
+              <div className="route-step-content">
+                <p className="route-step-title">Ta buss 172</p>
+                <p className="route-step-detail">Avgår 08:15 · Mot Karolinska</p>
+              </div>
+            </div>
+
+            <div className="route-step">
+              <div className="route-step-number">4</div>
+              <div className="route-step-content">
+                <p className="route-step-title">Framme vid Medborgarplatsen</p>
+                <p className="route-step-detail">ca 08:48</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="card">
         <div className="card-header">
-          <span className="card-title">Beläggning på buss 172</span>
+          <span className="card-title">Hur fullt är det på buss 172?</span>
         </div>
         <div className="card-content">
           <div className="occupancy-display">
@@ -58,7 +99,7 @@ function PlanBScreen({ travelData, onConfirm, onBack, onShowMap }) {
               <div className="occupancy-indicator" style={{ backgroundColor: '#2e7d32' }}></div>
               <div className="occupancy-info">
                 <span className="occupancy-text">Gott om sittplatser</span>
-                <span className="occupancy-detail">Prognos baserad på historisk data</span>
+                <span className="occupancy-detail">Brukar vara ledigt kl 08:15</span>
               </div>
             </div>
             <div className="occupancy-meter">
@@ -77,13 +118,9 @@ function PlanBScreen({ travelData, onConfirm, onBack, onShowMap }) {
         </div>
       </div>
 
-      <div className="status-card status-updating">
-        <div className="status-spinner"></div>
-        <span className="status-text">Uppdateras automatiskt</span>
-      </div>
-
       <div className="trust-message">
-        <p>SL tar ansvar – du får uppdateringar utan att leta information.</p>
+        <p>Du behöver inte göra något just nu.</p>
+        <p className="trust-subtext">Vi larmar dig om buss 172 blir försenad.</p>
       </div>
 
       <div className="spacer"></div>

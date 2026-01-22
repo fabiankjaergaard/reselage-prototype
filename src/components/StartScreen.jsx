@@ -14,10 +14,10 @@ function StartScreen({
 
   const getOccupancyLevel = (level) => {
     switch (level) {
-      case 'low': return { text: 'Låg beläggning', color: '#2e7d32' }
-      case 'medium': return { text: 'Normal beläggning', color: '#f9a825' }
-      case 'high': return { text: 'Hög beläggning', color: '#c62828' }
-      default: return { text: 'Låg beläggning', color: '#2e7d32' }
+      case 'low': return { text: 'Gott om plats', color: '#2e7d32' }
+      case 'medium': return { text: 'Ganska fullt', color: '#f9a825' }
+      case 'high': return { text: 'Mycket fullt', color: '#e67700' }
+      default: return { text: 'Gott om plats', color: '#2e7d32' }
     }
   }
 
@@ -40,7 +40,7 @@ function StartScreen({
           type: 'warning',
           message: (
             <>
-              <p>Hög beläggning förväntas</p>
+              <p>Det kan bli trångt</p>
               <p>Gå tidigare för att få sittplats på din resa till {destination}</p>
             </>
           )
@@ -179,7 +179,7 @@ function StartScreen({
 
       <div className="card highlight-target-occupancy">
         <div className="card-header">
-          <span className="card-title">Förväntad beläggning</span>
+          <span className="card-title">Hur fullt är det?</span>
           {savedTrip?.preferSeat && (
             <span className="preference-badge">Sittplats föredras</span>
           )}

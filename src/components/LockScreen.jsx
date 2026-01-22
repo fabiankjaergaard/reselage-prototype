@@ -5,7 +5,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
   const [showPartnerNotification, setShowPartnerNotification] = useState(false)
   const [currentTime, setCurrentTime] = useState('')
   const [isPlaying, setIsPlaying] = useState(true)
-  const [screenOn, setScreenOn] = useState(variant !== 'discovery' && variant !== 'morning') // Start dark for discovery and morning
+  const [screenOn, setScreenOn] = useState(variant !== 'discovery' && variant !== 'morning' && variant !== 'arrival') // Start dark for discovery, morning, and arrival
   const [isVibrating, setIsVibrating] = useState(false)
 
   // Watch for external trigger to show notification
@@ -37,6 +37,8 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
       setCurrentTime('18:45')
     } else if (variant === 'disruption') {
       setCurrentTime('08:24') // Morning commute time
+    } else if (variant === 'arrival') {
+      setCurrentTime('08:48') // Arrival time
     } else {
       const now = new Date()
       const hours = now.getHours().toString().padStart(2, '0')
@@ -58,6 +60,15 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
         setTimeout(() => setIsVibrating(false), 400)
       }, 1500)
       return () => clearTimeout(wakeUpTimer)
+    } else if (variant === 'arrival') {
+      // Arrival: Phone lights up, notification arrives after short delay
+      const arrivalTimer = setTimeout(() => {
+        setScreenOn(true)
+        setShowNotification(true)
+        setIsVibrating(true)
+        setTimeout(() => setIsVibrating(false), 400)
+      }, 1000)
+      return () => clearTimeout(arrivalTimer)
     } else if (variant === 'disruption') {
       // Disruption: notification only appears on click
       // Don't auto-show - wait for user interaction
@@ -88,11 +99,19 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
       }
     }
 
+    if (variant === 'arrival') {
+      return {
+        title: 'Du verkar vara framme! 🎉',
+        text: 'Hur gick resan? Tryck för att berätta.',
+        type: 'success'
+      }
+    }
+
     // Morning notifications based on scenario
     switch (notificationScenario) {
       case 'warning':
         return {
-          title: 'Hög beläggning förväntas',
+          title: 'Det kan bli trångt',
           text: 'Gå tidigare för att få sittplats. Tryck för detaljer.',
           type: 'warning'
         }
@@ -123,7 +142,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
   }
 
   // If screen is off, show dark screen
-  if (!screenOn && (variant === 'discovery' || variant === 'morning')) {
+  if (!screenOn && (variant === 'discovery' || variant === 'morning' || variant === 'arrival')) {
     return (
       <div className={`lock-screen screen-off ${appVersion === 'neutral' ? 'lock-screen-neutral' : ''}`}>
         {/* Dark screen - waiting for notification */}
@@ -133,7 +152,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
 
   return (
     <div
-      className={`lock-screen ${(variant === 'discovery' || variant === 'morning') ? 'waking-up' : ''} ${isVibrating ? 'vibrating' : ''} ${appVersion === 'neutral' ? 'lock-screen-neutral' : ''}`}
+      className={`lock-screen ${(variant === 'discovery' || variant === 'morning' || variant === 'arrival') ? 'waking-up' : ''} ${isVibrating ? 'vibrating' : ''} ${appVersion === 'neutral' ? 'lock-screen-neutral' : ''}`}
     >
       <div className="lock-screen-content">
         <div className="lock-time">{currentTime}</div>
@@ -195,7 +214,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
             </div>
             <div className="widget-mini-status">
               <span className="status-dot-mini"></span>
-              Allt flyter
+              Inga störningar
             </div>
           </div>
           <div className="widget-mini-content">
@@ -233,27 +252,8 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
         </div>
       )}
 
-      {/* Partner notification - only for discovery variant, tappable to open SMS */}
-      {variant === 'discovery' && showPartnerNotification && (
-        <div className="lock-notification lock-notification-partner partner-notification" onClick={onNotificationTap}>
-          <div className="notification-header">
-            <div className="notification-app-icon messages-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-              </svg>
-            </div>
-            <span className="notification-app-name">Meddelanden</span>
-            <span className="notification-time">nu</span>
-          </div>
-          <div className="notification-body">
-            <p className="notification-title">Fabio</p>
-            <p className="notification-text">Sprang precis 6 mil! Nu ska jag göra några supercoola bitcoin-affärer så vi blir ännu rikare 💰 #Success</p>
-          </div>
-        </div>
-      )}
-
-      {/* SL notification - shown for non-discovery OR neutral discovery */}
-      {showNotification && (variant !== 'discovery' || appVersion === 'neutral') && (
+      {/* SL notification - always shown when showNotification is true */}
+      {showNotification && (
         <div className={`lock-notification ${getNotificationStyle()} highlight-target-morning-notification`} onClick={onNotificationTap}>
           <div className="notification-header">
             <div className="notification-app-icon sl-logo">SL</div>

@@ -53,7 +53,7 @@ function ValueSlide({ onContinue, onBack }) {
             Tillbaka
           </button>
           <button className="slide-btn primary" onClick={onContinue}>
-            Avsluta
+            Fortsätt
           </button>
         </div>
 
@@ -70,6 +70,10 @@ function ValueSlide({ onContinue, onBack }) {
         <span className="dot"></span>
         <span className="dot"></span>
         <span className="dot active"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
       </div>
     </div>
   )

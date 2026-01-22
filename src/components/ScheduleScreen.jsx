@@ -108,13 +108,13 @@ function ScheduleScreen({ tripData, onComplete, onBack }) {
 
       <div className="card card-info highlight-target-expectations">
         <div className="card-header">
-          <span className="card-title">Vad händer sen?</span>
+          <span className="card-title">Så fungerar det</span>
         </div>
         <div className="card-content">
           <ul className="feature-list">
-            <li>Du får en notis på morgonen med status</li>
-            <li>Vi säger till vid störningar och hjälper dig hitta en ny rutt</li>
-            <li>Du slipper kolla SL själv</li>
+            <li>Du får en påminnelse innan du ska gå hemifrån</li>
+            <li>Om något händer med din resa hjälper vi dig hitta ett bättre alternativ</li>
+            <li>Du slipper tänka – vi håller koll åt dig</li>
           </ul>
         </div>
       </div>

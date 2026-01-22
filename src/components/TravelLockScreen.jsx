@@ -39,7 +39,7 @@ function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisrupti
           </div>
           <div className={`widget-status-indicator ${hasDisruption ? 'disruption' : 'ok'}`}>
             <span className="status-dot"></span>
-            {hasDisruption ? 'Störning' : 'Allt flyter'}
+            {hasDisruption ? 'Störning' : 'Inga störningar'}
           </div>
         </div>
 
@@ -97,11 +97,6 @@ function TravelLockScreen({ travelData, onUnlock, onNotificationTap, hasDisrupti
               <span>Störning upptäckt - vi söker alternativ</span>
             </div>
           )}
-        </div>
-
-        {/* Tap hint */}
-        <div className="widget-tap-hint">
-          Tryck för att öppna
         </div>
 
         {/* Invisible tap area */}
