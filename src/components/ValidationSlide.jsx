@@ -31,7 +31,7 @@ function ValidationSlide({ onContinue, onBack }) {
               </div>
               <div className="issue-card">
                 <span className="issue-icon">✗</span>
-                <p>"Rekommenderas"-taggen var inte tillräckligt tydlig</p>
+                <p>Saknar val av rutter på ett bra sätt</p>
               </div>
               <div className="issue-card">
                 <span className="issue-icon">✗</span>

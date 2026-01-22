@@ -37,6 +37,8 @@ import ValidationSlide from './components/ValidationSlide'
 import IterationBeforeAfterSlide from './components/IterationBeforeAfterSlide'
 import IterationBeforeAfterSlide2 from './components/IterationBeforeAfterSlide2'
 import ValidationSlide2 from './components/ValidationSlide2'
+import RiskEthicsSlide from './components/RiskEthicsSlide'
+import NextStepsSlide from './components/NextStepsSlide'
 
 function App() {
   // App version: 'personal' (with Fabio) or 'neutral' (standard)
@@ -919,7 +921,9 @@ function App() {
     { id: 'validation', label: 'Validering', section: 'Fas 3: Bevis' },
     { id: 'iteration-comparison', label: 'Iteration 1', section: 'Fas 3: Bevis' },
     { id: 'iteration-comparison2', label: 'Iteration 2', section: 'Fas 3: Bevis' },
-    { id: 'validation2', label: 'Resultat', section: 'Fas 3: Bevis' }
+    { id: 'validation2', label: 'Resultat', section: 'Fas 3: Bevis' },
+    { id: 'risk-ethics', label: 'Risker & Etik', section: 'Fas 3: Bevis' },
+    { id: 'next-steps', label: 'Nästa steg', section: 'Fas 3: Bevis' }
   ]
 
   const isPresentationSlide = presentationSlides.some(slide => slide.id === screen)
@@ -1292,8 +1296,24 @@ function App() {
       {/* Validation slide 2 - Quote */}
       {screen === 'validation2' && (
         <ValidationSlide2
-          onContinue={() => navigate('hook-slide')}
+          onContinue={() => navigate('risk-ethics')}
           onBack={() => navigate('iteration-comparison2')}
+        />
+      )}
+
+      {/* Risk & Ethics slide */}
+      {screen === 'risk-ethics' && (
+        <RiskEthicsSlide
+          onContinue={() => navigate('next-steps')}
+          onBack={() => navigate('validation2')}
+        />
+      )}
+
+      {/* Next Steps slide */}
+      {screen === 'next-steps' && (
+        <NextStepsSlide
+          onContinue={() => navigate('hook-slide')}
+          onBack={() => navigate('risk-ethics')}
         />
       )}
 

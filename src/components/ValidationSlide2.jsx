@@ -11,35 +11,30 @@ function ValidationSlide2({ onContinue, onBack }) {
 
         <div className="validation-content">
 
-          {/* Main quote */}
-          <div className="validation-quote-section validation-quote-large">
-            <blockquote className="validation-quote">
-              Åh, den visar ju exakt var jag ska gå! Det hade gjort min morgon så mycket lugnare.
-            </blockquote>
-            <p className="validation-quote-source">– Testdeltagare, 38 år, Södermalm</p>
-          </div>
-
-          {/* Additional quote */}
+          {/* Details quote */}
           <div className="validation-quote-section">
             <blockquote className="validation-quote">
-              Jag förstod direkt vad jag skulle göra. Ingen stress.
+              Nice med de små detaljerna, som det vänliga språket och kaffekoppen på morgonen. Det gör mer än vad man tror!
             </blockquote>
-            <p className="validation-quote-source">– Testdeltagare, 52 år, Bromma</p>
+            <p className="validation-quote-source">Testdeltagare 1</p>
           </div>
 
-          {/* Key takeaway */}
-          <div className="validation-takeaway">
-            <p><strong>Slutsats:</strong> Efter iterationen förstod alla testdeltagare direkt vad de skulle göra vid en störning – utan att behöva tänka.</p>
+          {/* GPS quote */}
+          <div className="validation-quote-section">
+            <blockquote className="validation-quote">
+              Bra med automatisk GPS-vy som anpassar sig efter vart du är i din resa, både när appen är öppen och låst.
+            </blockquote>
+            <p className="validation-quote-source">Testdeltagare 2</p>
           </div>
 
-        </div>
+                  </div>
 
         <div className="slide-actions">
           <button className="slide-btn secondary" onClick={onBack}>
             Tillbaka
           </button>
           <button className="slide-btn primary" onClick={onContinue}>
-            Avsluta
+            Fortsätt
           </button>
         </div>
 

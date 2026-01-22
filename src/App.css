@@ -7943,20 +7943,21 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 
 .validation-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .validation-title {
   font-size: 28px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: var(--sl-blue-dark);
   margin: 0 0 8px 0;
 }
 
 .validation-subtitle {
-  font-size: 14px;
-  color: #666;
+  font-size: 15px;
+  color: #64748b;
   margin: 0;
+  font-weight: 400;
 }
 
 .validation-content {
@@ -7994,8 +7995,8 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .validation-issues {
-  background: #fff5f5;
-  border-color: #ffcdd2;
+  background: white;
+  border: 1px solid #e2e8f0;
 }
 
 .validation-issue-cards {
@@ -8008,23 +8009,23 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  background: white;
+  background: #f8fafc;
   border-radius: 8px;
   padding: 10px 12px;
-  border: 1px solid #ffcdd2;
+  border: 1px solid #e2e8f0;
 }
 
 .issue-icon {
-  color: #c62828;
-  font-weight: 700;
-  font-size: 14px;
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 13px;
   flex-shrink: 0;
 }
 
 .issue-card p {
   margin: 0;
   font-size: 13px;
-  color: #555;
+  color: #475569;
   line-height: 1.4;
 }
 
@@ -8065,40 +8066,56 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 
 .validation-quote-section {
   text-align: center;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
-  border: 1px solid rgba(0, 62, 154, 0.15);
-  border-radius: 12px;
+  padding: 28px 32px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--sl-blue);
+  border-radius: 16px;
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+
+.validation-quote-section:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.validation-quote-section::before {
+  content: '"';
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  font-size: 48px;
+  color: var(--sl-blue);
+  opacity: 0.15;
+  font-family: Georgia, serif;
+  line-height: 1;
 }
 
 .validation-quote {
-  font-size: 15px;
+  font-size: 17px;
   font-style: italic;
-  color: #333;
-  margin: 0 0 8px 0;
-  line-height: 1.5;
+  color: #334155;
+  margin: 0 0 12px 0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
 }
 
-.validation-quote::before {
-  content: '"';
-}
-
+.validation-quote::before,
 .validation-quote::after {
-  content: '"';
+  content: none;
 }
 
 .validation-quote-source {
-  font-size: 12px;
-  color: #666;
+  font-size: 13px;
+  color: #64748b;
   margin: 0;
+  font-weight: 500;
 }
 
 .validation-quote-slide .validation-content {
   justify-content: center;
-}
-
-.validation-quote-large {
-  padding: 24px;
+  gap: 20px;
 }
 
 .validation-quote-large .validation-quote {
@@ -8252,6 +8269,251 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   color: #2e7d32;
   font-weight: 700;
   font-size: 14px;
+}
+
+/* =====================================================
+   RISK & ETHICS SLIDE STYLES
+   ===================================================== */
+
+.risk-ethics-slide {
+  text-align: left;
+}
+
+.risk-ethics-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.risk-ethics-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sl-blue-dark);
+  margin: 0 0 8px 0;
+}
+
+.risk-ethics-subtitle {
+  font-size: 15px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+.risk-ethics-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.risk-section {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px 20px;
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+
+.risk-section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.risk-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sl-blue-dark);
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.risk-section-title::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  background: var(--sl-blue);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.risk-answer {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.exclusion-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.exclusion-chip {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exclusion-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #94a3b8;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mitigation-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mitigation-list li {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mitigation-list li::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* =====================================================
+   NEXT STEPS SLIDE STYLES
+   ===================================================== */
+
+.next-steps-slide {
+  text-align: left;
+}
+
+.next-steps-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.next-steps-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sl-blue-dark);
+  margin: 0 0 8px 0;
+}
+
+.next-steps-subtitle {
+  font-size: 15px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+.next-steps-content {
+  display: flex;
+  gap: 20px;
+}
+
+.next-steps-section {
+  flex: 1;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.next-steps-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sl-blue-dark);
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.next-steps-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: step-counter;
+}
+
+.next-steps-list li {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  counter-increment: step-counter;
+}
+
+.next-steps-list li::before {
+  content: counter(step-counter);
+  min-width: 24px;
+  height: 24px;
+  background: var(--sl-blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.next-steps-closing {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.closing-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px 32px;
+}
+
+.closing-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.closing-quote p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--sl-blue-dark);
+  font-style: italic;
+  line-height: 1.4;
 }
 
 /* =====================================================
