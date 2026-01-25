@@ -101,22 +101,6 @@ function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
           <div className="timeline-line"></div>
         </div>
 
-        {/* Consequences */}
-        <div className="journey-consequences">
-          <div className="consequence-item">
-            <span className="consequence-dot"></span>
-            <span className="consequence-text">Stress som sitter i hela dagen</span>
-          </div>
-          <div className="consequence-item">
-            <span className="consequence-dot"></span>
-            <span className="consequence-text">Missar möten och viktiga deadlines</span>
-          </div>
-          <div className="consequence-item">
-            <span className="consequence-dot"></span>
-            <span className="consequence-text">Mental energi slut redan på morgonen</span>
-          </div>
-        </div>
-
         {/* Key insight */}
         <div className="journey-insight-box">
           <p className="journey-insight-text">

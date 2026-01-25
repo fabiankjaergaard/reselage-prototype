@@ -300,7 +300,7 @@ function TravelModeScreenAlt({
             <span>Störning upptäckt</span>
           </div>
           <p className="disruption-alert-text">Din resa påverkas med ca 6 minuter.</p>
-          <button className="btn btn-secondary" onClick={onShowPlanB}>
+          <button className="btn btn-primary" onClick={onShowPlanB}>
             Hitta alternativ rutt
           </button>
         </div>

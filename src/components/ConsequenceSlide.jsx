@@ -4,10 +4,11 @@ function ConsequenceSlide({ onContinue, onBack }) {
 
       <div className="slide-card consequence-slide">
 
-        <h2 className="consequence-title">Om SL inte löser detta?</h2>
-        <p className="consequence-subtitle">Konsekvenserna av att inte agera</p>
+        <div className="consequence-content">
+          <h2 className="consequence-title">Om SL inte löser detta?</h2>
+          <p className="consequence-subtitle">Konsekvenserna av att inte agera</p>
 
-        <div className="consequence-cards">
+          <div className="consequence-cards">
 
           <div className="consequence-card">
             <div className="consequence-card-icon">
@@ -43,9 +44,10 @@ function ConsequenceSlide({ onContinue, onBack }) {
               </svg>
             </div>
             <h3 className="consequence-card-title">Ingen beteendeförändring</h3>
-            <p className="consequence-card-desc">Utan förbättrad upplevelse väljer folk bilen. Klimatmålen blir svårare att nå.</p>
+            <p className="consequence-card-desc">Utan förbättrad upplevelse väljer Stina bilen. SL förlorar en potentiell lojal kund.</p>
           </div>
 
+          </div>
         </div>
 
         <div className="slide-actions">

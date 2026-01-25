@@ -649,18 +649,18 @@ body {
 }
 
 .status-disruption {
-  background: #faf8f7;
-  border: 1px solid #e8ddd8;
+  background: #fef5f5;
+  border: 1px solid #f5d5d5;
 }
 
 .status-disruption .status-dot {
-  background: #c4856c;
+  background: #e53935;
 }
 
 .disruption-alert-card {
-  background: #faf8f7;
-  border: 1px solid #e8ddd8;
-  border-left: 4px solid #c4856c;
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-left: none;
   border-radius: 12px;
   padding: 16px 16px 16px 14px;
   margin-bottom: 16px;
@@ -6640,6 +6640,7 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 /* Problem slide */
 .problem-slide {
   gap: 0;
+  justify-content: center;
 }
 
 .problem-title {
@@ -6660,9 +6661,25 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 .problem-scenario {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 36px;
+  gap: clamp(20px, 2.5vw, 28px);
+  margin-bottom: clamp(24px, 3vw, 36px);
   width: 100%;
+}
+
+.scenario-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scenario-mini-title {
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+  margin: 0;
+  padding-left: 4px;
 }
 
 .scenario-item {
@@ -7048,6 +7065,14 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   text-align: center;
 }
 
+.consequence-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .consequence-title {
   font-size: 28px;
   font-weight: 700;
@@ -7347,18 +7372,19 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .feasibility-header {
-  margin-bottom: 36px;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .feasibility-title {
-  font-size: 28px;
+  font-size: clamp(24px, 2.5vw, 28px);
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 6px 0;
 }
 
 .feasibility-subtitle {
-  font-size: 15px;
+  font-size: clamp(13px, 1.3vw, 15px);
   color: #888;
   margin: 0;
 }
@@ -7366,15 +7392,24 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 .feasibility-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 32px;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.feasibility-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px 24px;
+  border: 1px solid #e8e8e8;
 }
 
 .feasibility-section-title {
-  font-size: 14px;
+  font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .feasibility-list {
@@ -7384,10 +7419,20 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .feasibility-list li {
-  font-size: 14px;
+  font-size: clamp(13px, 1.3vw, 14px);
   color: #444;
-  padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 10px 0;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feasibility-list li::before {
+  content: '✓';
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .feasibility-list li:last-child {
@@ -7404,7 +7449,7 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .challenge-item:last-child {
@@ -7412,20 +7457,22 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .challenge-name {
-  font-size: 14px;
+  font-size: clamp(13px, 1.3vw, 14px);
   color: #444;
 }
 
 .challenge-level {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .challenge-level.easy {
   color: #2e7d32;
-  background: #f1f8e9;
+  background: #e8f5e9;
 }
 
 .challenge-level.medium {
@@ -7434,24 +7481,27 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .feasibility-bottom {
-  padding-top: 24px;
-  border-top: 1px solid #eee;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 114, 188, 0.15);
+  text-align: center;
 }
 
 .feasibility-verdict {
-  font-size: 15px;
+  font-size: clamp(14px, 1.4vw, 15px);
   color: #333;
   line-height: 1.6;
   margin: 0;
 }
 
 .feasibility-verdict strong {
-  color: #1a1a1a;
+  color: var(--sl-blue);
 }
 
 .feasibility-slide .slide-actions {
   margin-top: auto;
-  padding-top: 32px;
+  padding-top: 24px;
 }
 
 /* Research slide (persona) */
@@ -8102,6 +8152,7 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 .value-bottom {
   margin-top: auto;
   padding-top: 24px;
+  margin-bottom: 24px;
 }
 
 .value-verdict {
@@ -8703,6 +8754,177 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   line-height: 1.4;
 }
 
+/* Team slide */
+.team-slide {
+  text-align: center;
+  justify-content: center;
+  padding: clamp(24px, 3vw, 40px) clamp(24px, 4vw, 48px) !important;
+}
+
+.team-header {
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.team-title {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+}
+
+.team-subtitle {
+  font-size: clamp(12px, 1.2vw, 14px);
+  color: #888;
+  margin: 0;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 1.5vw, 16px);
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(12px, 1.5vw, 16px) clamp(10px, 1.2vw, 14px);
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  min-width: 100px;
+}
+
+.team-member-avatar {
+  width: clamp(44px, 5vw, 52px);
+  height: clamp(44px, 5vw, 52px);
+  border-radius: 50%;
+  background: var(--sl-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(16px, 1.8vw, 18px);
+  font-weight: 600;
+}
+
+.team-member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.team-member-name {
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.team-member-role {
+  font-size: clamp(10px, 1.1vw, 12px);
+  color: #888;
+}
+
+.team-why {
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  padding: clamp(14px, 1.8vw, 18px) clamp(16px, 2vw, 20px);
+  margin-bottom: clamp(14px, 1.8vw, 20px);
+  text-align: left;
+}
+
+.team-why-title {
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.team-why-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-why-list li {
+  font-size: clamp(12px, 1.2vw, 13px);
+  color: #444;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-why-list li::before {
+  content: '✓';
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.team-thanks {
+  padding: clamp(16px, 2vw, 20px);
+  background: var(--sl-blue);
+  border-radius: 10px;
+  margin-bottom: clamp(16px, 2vw, 20px);
+}
+
+.team-thanks p {
+  margin: 0;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 600;
+  color: white;
+}
+
+.team-thanks:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Confetti animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  border-radius: 3px;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -5%;
+    transform: translateX(0) rotateZ(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(50px) rotateZ(180deg);
+  }
+  50% {
+    transform: translateX(-30px) rotateZ(360deg);
+  }
+  75% {
+    transform: translateX(40px) rotateZ(540deg);
+  }
+  100% {
+    top: 105%;
+    transform: translateX(-20px) rotateZ(720deg);
+    opacity: 0.8;
+  }
+}
+
 /* =====================================================
    PRESENTATION SIDEBAR STYLES
    ===================================================== */
@@ -8777,6 +8999,11 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 .presentation-slide-item:hover .presentation-slide-label,
 .presentation-slide-item.active .presentation-slide-label {
   opacity: 1;
+}
+
+/* Presentation sidebar when prototype flow is showing - same position as normal */
+.presentation-sidebar.with-prototype {
+  /* Same position as on presentation slides */
 }
 
 /* =====================================================

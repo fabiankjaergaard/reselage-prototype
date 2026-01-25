@@ -102,7 +102,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
     if (variant === 'arrival') {
       return {
         title: 'Du verkar vara framme! 🎉',
-        text: 'Hur gick resan? Tryck för att berätta.',
+        text: 'Tyck till och hjälp oss göra din och andras resa ännu bättre.',
         type: 'success'
       }
     }
@@ -124,7 +124,7 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
       default:
         return {
           title: 'Din resa ser bra ut',
-          text: 'Inga störningar. Avgå 08:12 som vanligt.',
+          text: 'Inga störningar. Gå hemifrån 08:12 som vanligt.',
           type: 'success'
         }
     }

@@ -45,7 +45,7 @@ function NextStepsSlide({ onContinue, onBack }) {
             Tillbaka
           </button>
           <button className="slide-btn primary" onClick={onContinue}>
-            Avsluta
+            Fortsätt
           </button>
         </div>
 

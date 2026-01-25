@@ -40,6 +40,7 @@ import IterationBeforeAfterSlide2 from './components/IterationBeforeAfterSlide2'
 import ValidationSlide2 from './components/ValidationSlide2'
 import RiskEthicsSlide from './components/RiskEthicsSlide'
 import NextStepsSlide from './components/NextStepsSlide'
+import TeamSlide from './components/TeamSlide'
 
 function App() {
   // App version: 'personal' (with Fabio) or 'neutral' (standard)
@@ -240,7 +241,7 @@ function App() {
       'disruption': 'Hon ser den nya rutten och tycker den ser bra ut – framme i tid och gott om plats...',
       'travel-lock': 'Skönt att snabbt kunna se hur resan går utan att låsa upp mobilen...',
       'travel-lock-widget': 'GPS-kartan anpassar sig automatiskt efter var Stina är – alltid rätt information i rätt stund. Hon behöver inte ens öppna appen.',
-      'calm-journey': 'Stina sitter bekvämt på bussen och känner sig helt i kontroll. Med lite tid över scrollar hon igenom nyheterna – och plötsligt ser hon något bekant...',
+      'calm-journey': 'Stina har satt sig på sin nya buss och känner sig omhändertagen och i kontroll. Istället för att stressa kan hon lägga sin energi på att läsa nyheterna.',
       'arrival-lock': 'Stina kommer fram till kontoret i tid. En kort stund senare får hon en notis...',
       'arrival': 'Det här var ju väldigt smidigt, tänker Stina. Framme i tid trots störningar – och sittplats hela vägen! 5/5 kreativa bananer!'
     }
@@ -925,7 +926,8 @@ function App() {
     { id: 'iteration-comparison2', label: 'Iteration 2', section: 'Fas 3: Bevis' },
     { id: 'validation2', label: 'Resultat', section: 'Fas 3: Bevis' },
     { id: 'risk-ethics', label: 'Risker & Etik', section: 'Fas 3: Bevis' },
-    { id: 'next-steps', label: 'Nästa steg', section: 'Fas 3: Bevis' }
+    { id: 'next-steps', label: 'Nästa steg', section: 'Fas 3: Bevis' },
+    { id: 'team', label: 'Teamet', section: 'Avslutning' }
   ]
 
   const isPresentationSlide = presentationSlides.some(slide => slide.id === screen)
@@ -1322,8 +1324,15 @@ function App() {
       {/* Next Steps slide */}
       {screen === 'next-steps' && (
         <NextStepsSlide
-          onContinue={() => navigate('hook-slide')}
+          onContinue={() => navigate('team')}
           onBack={() => navigate('risk-ethics')}
+        />
+      )}
+
+      {/* Team slide */}
+      {screen === 'team' && (
+        <TeamSlide
+          onBack={() => navigate('next-steps')}
         />
       )}
 
@@ -1487,9 +1496,9 @@ function App() {
         </div>
       )}
 
-      {/* Presentation sidebar */}
-      {isPresentationSlide && (
-        <div className="presentation-sidebar">
+      {/* Presentation sidebar - show on presentation slides AND during prototype */}
+      {(isPresentationSlide || showSidebar) && (
+        <div className={`presentation-sidebar ${showSidebar ? 'with-prototype' : ''}`}>
           <div className="presentation-sidebar-title">Presentation</div>
           <div className="presentation-slides-list">
             {presentationSlides.map((slide, index) => (

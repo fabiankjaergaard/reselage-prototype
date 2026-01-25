@@ -34,21 +34,21 @@ function ComparisonSlide({ onContinue, onBack }) {
               <div className="timeline-step">
                 <div className="step-dot dot-gray"></div>
                 <div className="step-line line-degrading"></div>
-                <span className="step-text">Kollar appen själv</span>
+                <span className="step-text">Kollar SL-appen</span>
               </div>
               <div className="timeline-step">
                 <div className="step-dot dot-yellow"></div>
                 <div className="step-line line-degrading"></div>
-                <span className="step-text">Störning – ingen info</span>
+                <span className="step-text">Störning!</span>
               </div>
               <div className="timeline-step">
                 <div className="step-dot dot-red"></div>
                 <div className="step-line line-degrading"></div>
-                <span className="step-text">Googlar i panik</span>
+                <span className="step-text">Stress och panik</span>
               </div>
               <div className="timeline-step">
                 <div className="step-dot dot-gray"></div>
-                <span className="step-text">Sen & stressad</span>
+                <span className="step-text">Framme</span>
               </div>
             </div>
             <div className="timeline-result result-negative">
@@ -101,18 +101,6 @@ function ComparisonSlide({ onContinue, onBack }) {
             </div>
           )}
         </div>
-
-        {/* Stage labels */}
-        {showAfter && (
-          <div className="stage-labels animate-in-after">
-            <div className="stage-label-spacer"></div>
-            <div className="stage-label">Morgon</div>
-            <div className="stage-label">Störning</div>
-            <div className="stage-label">Hantering</div>
-            <div className="stage-label">Resultat</div>
-            <div className="stage-label-spacer"></div>
-          </div>
-        )}
 
         <div className="slide-actions">
           <button className="slide-btn secondary" onClick={onBack}>
