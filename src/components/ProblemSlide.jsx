@@ -7,8 +7,8 @@ function ProblemSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card problem-slide">
 
-        <h2 className="problem-title">Varför bilen vinner</h2>
-        <p className="problem-subtitle">Samma störning – olika upplevelser</p>
+        <h2 className="problem-title">Bil VS Kollektivtrafik</h2>
+        <p className="problem-subtitle">Samma störning, olika upplevelser</p>
 
         <div className="problem-scenario">
           <div className="scenario-item scenario-good">
@@ -52,11 +52,6 @@ function ProblemSlide({ onContinue, onBack, onSkipToPrototype }) {
               </svg>
             </div>
           </div>
-        </div>
-
-        <div className="problem-takeaway">
-          <p>Störning i trafiken.</p>
-          <p className="problem-takeaway-sub">Ingen vidare instruktion.</p>
         </div>
 
         <div className="slide-actions">
