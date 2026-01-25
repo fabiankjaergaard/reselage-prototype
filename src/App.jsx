@@ -26,6 +26,7 @@ import TitleSlide from './components/TitleSlide'
 import HookSlide from './components/HookSlide'
 import ProblemSlide from './components/ProblemSlide'
 import JourneySlide from './components/JourneySlide'
+import ConsequenceSlide from './components/ConsequenceSlide'
 import InsightSlide from './components/InsightSlide'
 import SolutionSlide from './components/SolutionSlide'
 import SummarySlide from './components/SummarySlide'
@@ -912,6 +913,7 @@ function App() {
     { id: 'persona', label: 'Persona', section: 'Fas 1: Problem' },
     { id: 'problem', label: 'Problem', section: 'Fas 1: Problem' },
     { id: 'journey', label: 'Kundresa', section: 'Fas 1: Problem' },
+    { id: 'consequence', label: 'Konsekvens', section: 'Fas 1: Problem' },
     { id: 'insight', label: 'Insikt', section: 'Fas 1: Problem' },
     { id: 'solution', label: 'Lösning', section: 'Fas 2: Lösning' },
     { id: 'summary', label: 'Sammanfattning', section: 'Fas 3: Bevis' },
@@ -1213,9 +1215,17 @@ function App() {
       {/* Journey slide */}
       {screen === 'journey' && (
         <JourneySlide
-          onContinue={() => navigate('insight')}
+          onContinue={() => navigate('consequence')}
           onBack={() => navigate('problem')}
           onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Consequence slide */}
+      {screen === 'consequence' && (
+        <ConsequenceSlide
+          onContinue={() => navigate('insight')}
+          onBack={() => navigate('journey')}
         />
       )}
 
@@ -1223,7 +1233,7 @@ function App() {
       {screen === 'insight' && (
         <InsightSlide
           onContinue={() => navigate('solution')}
-          onBack={() => navigate('journey')}
+          onBack={() => navigate('consequence')}
           onSkipToPrototype={() => navigate('discovery-lock')}
         />
       )}

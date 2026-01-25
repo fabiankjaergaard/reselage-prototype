@@ -63,18 +63,22 @@ function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
             </div>
           </div>
 
-          {/* Step 4 - Googlar */}
-          <div className="timeline-step step-stress">
+          {/* Step 4 - Stress */}
+          <div className="timeline-step step-stress step-pain">
             <div className="timeline-dot mood-stressed"></div>
             <div className="timeline-content">
               <div className="timeline-icon icon-stress">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/>
-                  <path d="m21 21-4.3-4.3"/>
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 8v4"/>
+                  <path d="M12 16h.01"/>
                 </svg>
               </div>
-              <span className="timeline-label">Googlar i panik</span>
-              <span className="timeline-desc">"Hur tar jag mig dit?!"</span>
+              <span className="timeline-label">Stress och panik</span>
+              <span className="timeline-desc">Letar alternativ, väntar oroligt, ringer jobbet</span>
+            </div>
+            <div className="pain-marker">
+              <span>Pain point</span>
             </div>
           </div>
 
@@ -95,6 +99,22 @@ function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
 
           {/* Connecting line */}
           <div className="timeline-line"></div>
+        </div>
+
+        {/* Consequences */}
+        <div className="journey-consequences">
+          <div className="consequence-item">
+            <span className="consequence-dot"></span>
+            <span className="consequence-text">Stress som sitter i hela dagen</span>
+          </div>
+          <div className="consequence-item">
+            <span className="consequence-dot"></span>
+            <span className="consequence-text">Missar möten och viktiga deadlines</span>
+          </div>
+          <div className="consequence-item">
+            <span className="consequence-dot"></span>
+            <span className="consequence-text">Mental energi slut redan på morgonen</span>
+          </div>
         </div>
 
         {/* Key insight */}
