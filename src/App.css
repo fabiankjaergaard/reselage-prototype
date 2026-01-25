@@ -6643,10 +6643,17 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .problem-title {
-  font-size: 28px;
+  font-size: clamp(22px, 2.5vw, 28px);
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0 0 36px 0;
+  margin: 0;
+  text-align: center;
+}
+
+.problem-subtitle {
+  font-size: clamp(13px, 1.4vw, 15px);
+  color: #666;
+  margin: 6px 0 clamp(24px, 3vw, 36px) 0;
   text-align: center;
 }
 
@@ -6754,21 +6761,31 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .problem-takeaway {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 32px;
+  margin: clamp(16px, 2vw, 24px) auto clamp(24px, 3vw, 32px) auto;
+  padding: clamp(20px, 2.5vw, 28px) clamp(24px, 3vw, 40px);
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  max-width: 340px;
 }
 
 .problem-takeaway p {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: clamp(15px, 1.6vw, 17px);
+  font-weight: 600;
   color: #333;
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
 }
 
 .problem-takeaway-sub {
-  font-size: 14px !important;
+  font-size: clamp(12px, 1.3vw, 14px) !important;
   font-weight: 400 !important;
   color: #888 !important;
+  margin: 0 !important;
 }
 
 /* Journey slide */

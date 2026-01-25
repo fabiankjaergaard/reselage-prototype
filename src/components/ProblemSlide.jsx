@@ -7,7 +7,8 @@ function ProblemSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card problem-slide">
 
-        <h2 className="problem-title">Idag: Du är ensam med din resa</h2>
+        <h2 className="problem-title">Varför bilen vinner</h2>
+        <p className="problem-subtitle">Samma störning – olika upplevelser</p>
 
         <div className="problem-scenario">
           <div className="scenario-item scenario-good">
