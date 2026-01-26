@@ -4993,6 +4993,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 
 .sl-nav-item {
@@ -6585,6 +6586,16 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   justify-content: center;
   text-align: center;
   padding: clamp(32px, 4vw, 48px) clamp(24px, 3vw, 40px) !important;
+}
+
+.hook-concept-label {
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #003e9a;
+  margin: 0 0 clamp(16px, 2vw, 24px);
+  text-align: center;
 }
 
 .hook-gif {

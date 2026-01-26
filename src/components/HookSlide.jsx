@@ -4,17 +4,14 @@ function HookSlide({ onContinue }) {
 
       <div className="slide-card hook-slide">
 
+        <p className="hook-concept-label">SL: Reseläge</p>
+
         <img src="/bus-journey-transparent.gif" alt="" className="hook-gif" />
 
         <h1 className="hook-headline">
-          Bilen ger dig <span className="hook-highlight">kontroll</span>.<br />
-          Kollektivtrafiken ber dig hoppas.<br />
-          Varför?
+          GPS:en ger dig <span className="hook-highlight">kontroll</span> – från A till B, utan att du behöver <span className="hook-highlight">tänka</span>.<br />
+          Varför kan inte SL göra samma sak?
         </h1>
-
-        <p className="hook-subtext">
-          Det behöver inte vara så.
-        </p>
 
         <div className="slide-actions">
           <button className="slide-btn primary" onClick={onContinue}>

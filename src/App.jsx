@@ -234,7 +234,7 @@ function App() {
         : 'Stina blir nyfiken. Om SL faktiskt kan hålla koll åt henne – då kanske morgonen kan bli lite lättare.',
       'setup': 'Stina går igenom onboardingen och fyller i det SL behöver för att anpassa sig efter henne...',
       'morning-lock-screen': 'Det är morgon och Stina får sin första pushnotis från Reseläge...',
-      'lock-screen': 'Stina sitter på bussen och lyssnar på sitt favoritavsnitt med Mikael Vimmenby som gästar Framgångspodden när hon plötsligt får en notis...',
+      'lock-screen': 'Stina sitter på bussen och lyssnar på sitt favoritavsnitt med Mikael Vemmenby som gästar Framgångspodden när hon plötsligt får en notis...',
       'travel': planBActive
         ? 'Stina valde snabbt en alternativ rutt som passade hennes preferenser – framme i tid och gott om plats. GPS-vyn visar exakt var hon ska gå och när bussen kommer. Hon känner sig lugn och i full kontroll.'
         : hasDisruption
@@ -918,8 +918,8 @@ function App() {
   const presentationSlides = [
     { id: 'hook-slide', label: 'Hook', section: 'Fas 1: Problem' },
     { id: 'persona', label: 'Persona', section: 'Fas 1: Problem' },
-    { id: 'problem', label: 'Problem', section: 'Fas 1: Problem' },
     { id: 'journey', label: 'Kundresa', section: 'Fas 1: Problem' },
+    { id: 'problem', label: 'Problem', section: 'Fas 1: Problem' },
     { id: 'consequence', label: 'Konsekvens', section: 'Fas 1: Problem' },
     { id: 'insight', label: 'Insikt', section: 'Fas 1: Problem' },
     { id: 'solution', label: 'Lösning', section: 'Fas 2: Lösning' },
@@ -1188,17 +1188,8 @@ function App() {
       {/* Persona slide */}
       {screen === 'persona' && (
         <ResearchSlide
-          onContinue={() => navigate('problem')}
-          onBack={() => navigate('hook-slide')}
-          onSkipToPrototype={() => navigate('discovery-lock')}
-        />
-      )}
-
-      {/* Problem slide */}
-      {screen === 'problem' && (
-        <ProblemSlide
           onContinue={() => navigate('journey')}
-          onBack={() => navigate('persona')}
+          onBack={() => navigate('hook-slide')}
           onSkipToPrototype={() => navigate('discovery-lock')}
         />
       )}
@@ -1206,8 +1197,17 @@ function App() {
       {/* Journey slide */}
       {screen === 'journey' && (
         <JourneySlide
+          onContinue={() => navigate('problem')}
+          onBack={() => navigate('persona')}
+          onSkipToPrototype={() => navigate('discovery-lock')}
+        />
+      )}
+
+      {/* Problem slide */}
+      {screen === 'problem' && (
+        <ProblemSlide
           onContinue={() => navigate('consequence')}
-          onBack={() => navigate('problem')}
+          onBack={() => navigate('journey')}
           onSkipToPrototype={() => navigate('discovery-lock')}
         />
       )}
@@ -1216,7 +1216,7 @@ function App() {
       {screen === 'consequence' && (
         <ConsequenceSlide
           onContinue={() => navigate('insight')}
-          onBack={() => navigate('journey')}
+          onBack={() => navigate('problem')}
         />
       )}
 
