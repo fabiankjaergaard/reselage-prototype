@@ -229,7 +229,9 @@ function App() {
     const texts = {
       'discovery-lock': 'Det är kväll och Stina får en pushnotis från SL om en ny funktion...',
       'sl-app': 'Hon klickar på notisen och ser att SL har lagt till en ny funktion...',
-      'start': 'Stina blir nyfiken. Om SL faktiskt kan hålla koll åt henne – då kanske morgonen kan bli lite lättare.',
+      'start': savedTrip
+        ? 'Stina öppnar appen och får direkt en enkel överblick över sin resa – allt hon behöver för att känna sig i kontroll.'
+        : 'Stina blir nyfiken. Om SL faktiskt kan hålla koll åt henne – då kanske morgonen kan bli lite lättare.',
       'setup': 'Stina går igenom onboardingen och fyller i det SL behöver för att anpassa sig efter henne...',
       'morning-lock-screen': 'Det är morgon och Stina får sin första pushnotis från Reseläge...',
       'lock-screen': 'Stina sitter på bussen och lyssnar på sitt favoritavsnitt med Mikael Vimmenby som gästar Framgångspodden när hon plötsligt får en notis...',
@@ -631,7 +633,11 @@ function App() {
       case 'sl-app':
         return (
           <SLAppMockup
-            onOpenReselage={() => navigate('start')}
+            onOpenReselage={() => {
+              setSavedTrip(null)
+              setSetupTripData(null)
+              navigate('start')
+            }}
             highlightReselage={!testMode && typingComplete}
           />
         )
@@ -972,14 +978,9 @@ function App() {
           { text: 'Personalisering - Stina anger vad som är viktigt för henne. Denna yta kan utökas för att lösa fler pain points i framtiden.', top: '580px', position: 'left', highlightClass: 'highlight-preferences' }
         ]
       case 'schedule':
-        return [
-          { text: 'Stina väljer vilka dagar hon pendlar - ingen gillar onödiga notiser. Vi anpassar oss efter hennes schema.', top: '320px', position: 'left', highlightClass: 'highlight-days' },
-          { text: 'Tydliga förväntningar - Stina vet precis vad hon får. Mindre stress, mer kontroll över sin morgon.', top: '720px', position: 'left', highlightClass: 'highlight-expectations' }
-        ]
+        return []
       case 'onboarding-complete':
-        return [
-          { text: 'Micro copy som talar till Stinas behov - mjukt, tryggt språk som kontinuerligt visar på värdet av tjänsten.', top: '560px', position: 'left', highlightClass: 'highlight-microcopy' }
-        ]
+        return []
       case 'morning-lock-screen':
         return []
       case 'travel':
@@ -987,21 +988,9 @@ function App() {
       case 'travel-lock-widget':
         return []
       case 'disruption':
-        return [
-          { text: 'Tydlig jämförelse – Stina ser direkt skillnaden mellan att stanna kvar vs. ta alternativet. Enkel beslutssituation.', top: '420px', position: 'left', highlightClass: 'highlight-disruption-recommended' }
-        ]
+        return []
       case 'start':
-        if (savedTrip) {
-          return [
-            { text: 'It\'s all about the details – små detaljer som skapar en känsla av lugn och omsorg.', top: '80px', position: 'left', highlightClass: 'highlight-morning-coffee' },
-            { text: 'Stina ser direkt att allt är under kontroll', top: '300px', position: 'left', highlightClass: 'highlight-status-card' },
-            { text: 'Syns den inte, finns den inte – vi lyfter fram en befintlig funktion som idag ligger helt gömd.', top: '680px', position: 'left', highlightClass: 'highlight-live-map' },
-            { text: 'Personligt anpassat – vi lyfter in Stinas preferenser och visar det som är viktigt för just henne för en bra resa.', top: '820px', position: 'left', highlightClass: 'highlight-occupancy' }
-          ]
-        }
-        return [
-          { text: 'Vi visar värde direkt - Stina förstår vad hon får innan hon ens börjat. Tydlighet skapar trygghet.', top: '440px', position: 'left', highlightClass: 'highlight-value-props' }
-        ]
+        return []
       default:
         return []
     }
