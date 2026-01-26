@@ -5,11 +5,11 @@ function TeamSlide({ onBack }) {
   const [explode, setExplode] = useState(false)
 
   const teamMembers = [
-    { name: 'Fabian', role: 'Titel' },
-    { name: 'Victoria', role: 'Titel' },
-    { name: 'Malou', role: 'Titel' },
-    { name: 'Thea', role: 'Titel' },
-    { name: 'Isabelle', role: 'Titel' },
+    { name: 'Fabian', role: 'Utvecklare & UX Designer' },
+    { name: 'Victoria', role: 'Projektledare' },
+    { name: 'Malou', role: 'UX Researcher' },
+    { name: 'Thea', role: 'Tjänstedesigner' },
+    { name: 'Isabelle', role: 'Visuell Designer' },
   ]
 
   const confettiConfig = {
@@ -62,9 +62,9 @@ function TeamSlide({ onBack }) {
         <div className="team-why">
           <h3 className="team-why-title">Varför vi?</h3>
           <ul className="team-why-list">
-            <li>Djup förståelse för användarcentrerad design</li>
-            <li>Erfarenhet av komplexa tjänstedesign-projekt</li>
-            <li>Passion för att förbättra vardagen för resenärer</li>
+            <li>Djupa insikter i resenärers pain points och beteenden</li>
+            <li>Kombination av research, design och teknisk kompetens</li>
+            <li>Användartestad lösning byggd på verkliga behov</li>
           </ul>
         </div>
 
