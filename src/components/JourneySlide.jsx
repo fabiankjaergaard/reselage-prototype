@@ -1,9 +1,6 @@
 function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
   return (
     <div className="slide-wrapper">
-      <button className="skip-to-prototype" onClick={onSkipToPrototype}>
-        Hoppa till prototyp →
-      </button>
 
       <div className="slide-card journey-slide">
 
