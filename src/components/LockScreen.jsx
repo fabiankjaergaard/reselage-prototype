@@ -219,53 +219,6 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
         </div>
       )}
 
-      {/* Reseläge Live Activity Widget - show during disruption (traveling) */}
-      {variant === 'disruption' && (
-        <div className="live-activity-widget-mini">
-          <div className="widget-mini-header">
-            <div className="widget-mini-app">
-              <div className="widget-mini-icon">SL</div>
-              <span>Reseläge</span>
-            </div>
-            <div className="widget-mini-status">
-              <span className="status-dot-mini"></span>
-              Inga störningar
-            </div>
-          </div>
-          <div className="widget-mini-content">
-            <div className="widget-mini-transport">
-              <span className="transport-badge-mini">Röda linjen</span>
-              <span>→ Kontoret</span>
-            </div>
-            <div className="widget-mini-progress">
-              <div className="mini-progress-track">
-                <div className="mini-progress-fill" style={{ width: '35%' }}></div>
-                <div className="mini-progress-bus" style={{ left: '35%' }}>
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <rect x="3" y="6" width="18" height="10" rx="2"/>
-                    <circle cx="7" cy="16" r="1.5"/>
-                    <circle cx="17" cy="16" r="1.5"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="widget-mini-info">
-              <div className="mini-info-item">
-                <span className="mini-label">Nästa</span>
-                <span className="mini-value">Slussen</span>
-              </div>
-              <div className="mini-info-item">
-                <span className="mini-label">Framme</span>
-                <span className="mini-value">08:42</span>
-              </div>
-              <div className="mini-info-item">
-                <span className="mini-label">Kvar</span>
-                <span className="mini-value highlight">18 min</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {!showNotification && variant !== 'discovery' && (
         <div className="lock-hint">
