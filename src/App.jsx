@@ -239,7 +239,7 @@ function App() {
         ? 'Stina valde snabbt en alternativ rutt som passade hennes preferenser – framme i tid och gott om plats. GPS-vyn visar exakt var hon ska gå och när bussen kommer. Hon känner sig lugn och i full kontroll.'
         : hasDisruption
           ? 'Stina får lite panik och klickar på notisen – men SL har redan en lösning...'
-          : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka... för inget kan ju gå fel med SL, eller hur?',
+          : 'Stina har startat sin resa och allt flyter på. Nu är det bara att luta sig tillbaka... för inga störningar i kollektivtrafiken kan ju hända, eller hur?',
       'disruption': 'Hon ser den nya rutten och tycker den ser bra ut – framme i tid och gott om plats...',
       'travel-lock': 'Skönt att snabbt kunna se hur resan går utan att låsa upp mobilen...',
       'travel-lock-widget': 'GPS-kartan anpassar sig automatiskt efter var Stina är – alltid rätt information i rätt stund. Hon behöver inte ens öppna appen.',
