@@ -204,6 +204,21 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
         </div>
       )}
 
+      {/* SL notification - overlaps the widget from above */}
+      {showNotification && (
+        <div className={`lock-notification ${getNotificationStyle()} highlight-target-morning-notification ${variant === 'disruption' ? 'notification-overlay' : ''}`} onClick={onNotificationTap}>
+          <div className="notification-header">
+            <div className="notification-app-icon sl-logo">SL</div>
+            <span className="notification-app-name">Reseläge</span>
+            <span className="notification-time">nu</span>
+          </div>
+          <div className="notification-body">
+            <p className="notification-title">{notification.title}</p>
+            <p className="notification-text">{notification.text}</p>
+          </div>
+        </div>
+      )}
+
       {/* Reseläge Live Activity Widget - show during disruption (traveling) */}
       {variant === 'disruption' && (
         <div className="live-activity-widget-mini">
@@ -248,21 +263,6 @@ function LockScreen({ onNotificationTap, variant = 'disruption', notificationSce
                 <span className="mini-value highlight">18 min</span>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* SL notification - always shown when showNotification is true */}
-      {showNotification && (
-        <div className={`lock-notification ${getNotificationStyle()} highlight-target-morning-notification`} onClick={onNotificationTap}>
-          <div className="notification-header">
-            <div className="notification-app-icon sl-logo">SL</div>
-            <span className="notification-app-name">Reseläge</span>
-            <span className="notification-time">nu</span>
-          </div>
-          <div className="notification-body">
-            <p className="notification-title">{notification.title}</p>
-            <p className="notification-text">{notification.text}</p>
           </div>
         </div>
       )}

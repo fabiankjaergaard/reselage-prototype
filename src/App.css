@@ -3602,11 +3602,11 @@ body {
 @keyframes notificationSlideIn {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -3638,12 +3638,12 @@ body {
   border-radius: 16px;
   padding: 12px 14px;
   width: calc(100% - 32px);
-  max-width: 340px;
+  max-width: none;
   cursor: pointer;
   position: absolute;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 120px;
+  left: 16px;
+  z-index: 20;
 }
 
 .lock-notification:active {
@@ -3738,9 +3738,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 12px 14px;
-  width: 100%;
-  max-width: 340px;
-  margin-bottom: 12px;
+  width: calc(100% - 32px);
+  max-width: none;
+  margin: auto 16px 12px 16px;
 }
 
 .widget-mini-header {
@@ -5336,7 +5336,7 @@ body {
 .flow-sidebar {
   display: none; /* Hidden for now */
   position: absolute;
-  left: calc(50% + 210px);
+  left: calc(50% + 250px);
   top: 0;
   width: 200px;
   padding-top: 20px;
@@ -5693,8 +5693,9 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 
 /* Live Activity Widget */
 .live-activity-widget {
-  width: 100%;
-  max-width: 340px;
+  width: calc(100% - 20px);
+  max-width: none;
+  margin: auto 10px 80px 10px;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
