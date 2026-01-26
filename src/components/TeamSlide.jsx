@@ -5,11 +5,11 @@ function TeamSlide({ onBack }) {
   const [explode, setExplode] = useState(false)
 
   const teamMembers = [
-    { name: 'Fabian', role: 'Utvecklare & UX Designer' },
-    { name: 'Victoria', role: 'Projektledare' },
-    { name: 'Malou', role: 'UX Researcher' },
-    { name: 'Thea', role: 'Tjänstedesigner' },
-    { name: 'Isabelle', role: 'Visuell Designer' },
+    { name: 'Fabian', role: 'Utvecklare & UX Designer', avatar: '/fabian-avatar.png' },
+    { name: 'Victoria', role: 'Projektledare', avatar: '/victoria-avatar.png' },
+    { name: 'Malou', role: 'UX Researcher', avatar: '/malou-avatar.png' },
+    { name: 'Thea', role: 'Tjänstedesigner', avatar: '/thea-avatar.png' },
+    { name: 'Isabelle', role: 'Visuell Designer', avatar: '/isabelle-avatar.png' },
   ]
 
   const confettiConfig = {
@@ -49,7 +49,10 @@ function TeamSlide({ onBack }) {
           {teamMembers.map((member, index) => (
             <div key={index} className="team-member">
               <div className="team-member-avatar">
-                {member.name.charAt(0)}
+                {member.avatar
+                  ? <img src={member.avatar} alt={member.name} className="team-member-img" />
+                  : member.name.charAt(0)
+                }
               </div>
               <div className="team-member-info">
                 <span className="team-member-name">{member.name}</span>
@@ -72,11 +75,6 @@ function TeamSlide({ onBack }) {
           <p>Tack för att ni lyssnade!</p>
         </div>
 
-        <div className="slide-actions">
-          <button className="slide-btn secondary" onClick={onBack}>
-            Tillbaka
-          </button>
-        </div>
 
       </div>
 

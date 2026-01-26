@@ -8796,6 +8796,10 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   flex-wrap: wrap;
   gap: clamp(10px, 1.5vw, 16px);
   margin-bottom: clamp(16px, 2vw, 24px);
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  padding: clamp(16px, 2vw, 24px);
 }
 
 .team-member {
@@ -8811,8 +8815,8 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
 }
 
 .team-member-avatar {
-  width: clamp(44px, 5vw, 52px);
-  height: clamp(44px, 5vw, 52px);
+  width: clamp(64px, 7vw, 80px);
+  height: clamp(64px, 7vw, 80px);
   border-radius: 50%;
   background: var(--sl-blue);
   color: white;
@@ -8821,6 +8825,15 @@ body.highlight-lockscreen-convenience .highlight-target-lockscreen-convenience {
   justify-content: center;
   font-size: clamp(16px, 1.8vw, 18px);
   font-weight: 600;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fff;
+}
+
+.team-member-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .team-member-info {
