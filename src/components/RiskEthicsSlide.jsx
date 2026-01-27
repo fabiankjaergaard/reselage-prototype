@@ -4,6 +4,7 @@ function RiskEthicsSlide({ onContinue, onBack }) {
 
       <div className="slide-card risk-ethics-slide">
 
+        <div className="slide-content-center">
         <div className="risk-ethics-header">
           <h2 className="risk-ethics-title">Risker och etik</h2>
           <p className="risk-ethics-subtitle">Vi har tänkt ett varv till</p>
@@ -39,6 +40,8 @@ function RiskEthicsSlide({ onContinue, onBack }) {
               <li>Befintliga kanaler (skyltar, högtalare) finns kvar</li>
             </ul>
           </div>
+
+        </div>
 
         </div>
 

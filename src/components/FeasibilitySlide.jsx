@@ -4,6 +4,7 @@ function FeasibilitySlide({ onContinue, onBack }) {
 
       <div className="slide-card feasibility-slide">
 
+        <div className="slide-content-center">
         <div className="feasibility-header">
           <h2 className="feasibility-title">Kan vi bygga detta?</h2>
           <p className="feasibility-subtitle">En snabb teknisk genomgång</p>
@@ -48,6 +49,8 @@ function FeasibilitySlide({ onContinue, onBack }) {
             <strong>Vår bedömning:</strong> Genomförbart med befintlig teknik.
             Största jobbet är UX och logik – inte infrastruktur.
           </p>
+        </div>
+
         </div>
 
         <div className="slide-actions">

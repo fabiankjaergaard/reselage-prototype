@@ -4,6 +4,7 @@ function ResearchSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card research-slide persona-centered">
 
+        <div className="slide-content-center">
         <div className="persona-header">
           <div className="persona-avatar-large">
             <img src="/stina.png" alt="Stina" className="persona-image" />
@@ -29,6 +30,8 @@ function ResearchSlide({ onContinue, onBack, onSkipToPrototype }) {
             <span className="trait-label">Behov</span>
             <span className="trait-value">Vill kunna släppa ansvaret</span>
           </div>
+        </div>
+
         </div>
 
         <div className="slide-actions">

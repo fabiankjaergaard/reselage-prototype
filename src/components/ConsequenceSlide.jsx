@@ -4,6 +4,7 @@ function ConsequenceSlide({ onContinue, onBack }) {
 
       <div className="slide-card consequence-slide">
 
+        <div className="slide-content-center">
         <div className="consequence-content">
           <h2 className="consequence-title">Om SL inte löser detta?</h2>
           <p className="consequence-subtitle">Konsekvenserna av att inte agera</p>
@@ -48,6 +49,8 @@ function ConsequenceSlide({ onContinue, onBack }) {
           </div>
 
           </div>
+        </div>
+
         </div>
 
         <div className="slide-actions">

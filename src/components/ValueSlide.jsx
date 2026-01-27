@@ -4,6 +4,7 @@ function ValueSlide({ onContinue, onBack }) {
 
       <div className="slide-card value-slide">
 
+        <div className="slide-content-center">
         <div className="value-header">
           <h2 className="value-title">Varför ska SL investera i detta?</h2>
           <p className="value-subtitle">Affärsvärde och potential</p>
@@ -46,6 +47,8 @@ function ValueSlide({ onContinue, onBack }) {
             <strong>Sammanfattning:</strong> Liten investering, stor påverkan på kundupplevelsen –
             och SL:s position som modern kollektivtrafik.
           </p>
+        </div>
+
         </div>
 
         <div className="slide-actions">

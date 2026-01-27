@@ -4,6 +4,7 @@ function ValidationSlide2({ onContinue, onBack }) {
 
       <div className="slide-card validation-slide validation-quote-slide">
 
+        <div className="slide-content-center">
         <div className="validation-header">
           <h2 className="validation-title">Resultat</h2>
           <p className="validation-subtitle">Vad testdeltagarna sa</p>
@@ -28,6 +29,7 @@ function ValidationSlide2({ onContinue, onBack }) {
           </div>
 
                   </div>
+        </div>
 
         <div className="slide-actions">
           <button className="slide-btn secondary" onClick={onBack}>

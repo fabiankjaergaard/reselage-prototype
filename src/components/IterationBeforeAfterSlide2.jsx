@@ -4,6 +4,7 @@ function IterationBeforeAfterSlide2({ onContinue, onBack }) {
 
       <div className="slide-card iteration-comparison-slide">
 
+        <div className="slide-content-center">
         <div className="iteration-header">
           <h2 className="iteration-title">Iteration</h2>
           <p className="iteration-subtitle">Så här förbättrade vi resevyn</p>
@@ -27,6 +28,7 @@ function IterationBeforeAfterSlide2({ onContinue, onBack }) {
             </div>
             <p className="iteration-caption">GPS-vy som visar exakt<br/>var man ska gå</p>
           </div>
+        </div>
         </div>
 
         <div className="slide-actions">

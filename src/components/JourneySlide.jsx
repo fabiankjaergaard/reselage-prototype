@@ -4,6 +4,7 @@ function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card journey-slide">
 
+        <div className="slide-content-center">
         <h2 className="journey-title">Stinas morgon idag</h2>
         <p className="journey-subtitle">En resa utan stöd</p>
 
@@ -104,6 +105,7 @@ function JourneySlide({ onContinue, onBack, onSkipToPrototype }) {
             "Jag orkar inte behöva tänka och stressa nu..."
           </p>
           <span className="journey-insight-author">– Stina</span>
+        </div>
         </div>
 
         <div className="slide-actions">

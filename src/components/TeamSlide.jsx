@@ -40,6 +40,7 @@ function TeamSlide({ onBack }) {
 
       <div className="slide-card team-slide">
 
+        <div className="slide-content-center">
         <div className="team-header">
           <h2 className="team-title">Vårt team</h2>
           <p className="team-subtitle">Varför vi är rätt för detta projekt</p>
@@ -73,6 +74,7 @@ function TeamSlide({ onBack }) {
 
         <div className="team-thanks" onClick={triggerConfetti} style={{ cursor: 'pointer' }}>
           <p>Tack för att ni lyssnade!</p>
+        </div>
         </div>
 
 

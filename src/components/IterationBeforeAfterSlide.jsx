@@ -4,6 +4,7 @@ function IterationBeforeAfterSlide({ onContinue, onBack }) {
 
       <div className="slide-card iteration-comparison-slide">
 
+        <div className="slide-content-center">
         <div className="iteration-header">
           <h2 className="iteration-title">Iteration</h2>
           <p className="iteration-subtitle">Så här förbättrade vi störningsvyn</p>
@@ -37,6 +38,8 @@ function IterationBeforeAfterSlide({ onContinue, onBack }) {
             </div>
             <p className="iteration-caption">Tydligt val utan kognitiv<br/>overload, men med valmöjligheter</p>
           </div>
+        </div>
+
         </div>
 
         <div className="slide-actions">

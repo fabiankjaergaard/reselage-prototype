@@ -3,6 +3,7 @@ function TitleSlide({ onContinue, onSkipToPrototype }) {
     <div className="slide-wrapper">
       <div className="slide-card title-slide">
 
+        <div className="slide-content-center">
         <div className="title-content">
           <h1 className="title-headline">
             Varför Stina tar bilen – trots att bussen redan går rätt väg
@@ -10,6 +11,8 @@ function TitleSlide({ onContinue, onSkipToPrototype }) {
           <p className="title-subtitle">
             Ett problem om kontroll, inte restid
           </p>
+        </div>
+
         </div>
 
         <div className="slide-actions">
