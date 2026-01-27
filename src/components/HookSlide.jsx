@@ -4,9 +4,7 @@ function HookSlide({ onContinue }) {
 
       <div className="slide-card hook-slide">
 
-        <div className="slide-content-center">
-        <img src="/sl-logo.jpg" alt="SL" className="hook-sl-logo" />
-        <p className="hook-concept-label">Reseläge</p>
+        <p className="hook-concept-label">SL: Reseläge</p>
 
         <img src="/bus-journey-transparent.gif" alt="" className="hook-gif" />
 
@@ -15,14 +13,11 @@ function HookSlide({ onContinue }) {
           Varför kan inte SL göra samma sak?
         </h1>
 
-        </div>
-
         <div className="slide-actions">
           <button className="slide-btn primary" onClick={onContinue}>
             Fortsätt
           </button>
         </div>
-
 
       </div>
 

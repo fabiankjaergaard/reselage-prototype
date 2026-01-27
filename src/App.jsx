@@ -23,7 +23,6 @@ import TravelLockScreenWidget from './components/TravelLockScreenWidget'
 import SMSView from './components/SMSView'
 import ResearchSlide from './components/ResearchSlide'
 import TitleSlide from './components/TitleSlide'
-import IntroSlide from './components/IntroSlide'
 import HookSlide from './components/HookSlide'
 import ProblemSlide from './components/ProblemSlide'
 import JourneySlide from './components/JourneySlide'
@@ -51,7 +50,7 @@ function App() {
   const [testMode, setTestMode] = useState(false)
 
   // Current screen state - start with intro
-  const [screen, setScreen] = useState('intro')
+  const [screen, setScreen] = useState('hook-slide')
 
   // Test scenarios - phase-based, open-ended
   const thinkAloud = 'Beskriv gärna vad du ser, vad du tror händer om du klickar någonstans, och om något känns oklart.'
@@ -917,8 +916,7 @@ function App() {
 
   // Presentation slides for navigation
   const presentationSlides = [
-    { id: 'intro', label: 'Intro', section: 'Intro' },
-    { id: 'hook-slide', label: 'Start', section: 'Fas 1: Problem' },
+    { id: 'hook-slide', label: 'Hook', section: 'Fas 1: Problem' },
     { id: 'persona', label: 'Persona', section: 'Fas 1: Problem' },
     { id: 'journey', label: 'Kundresa', section: 'Fas 1: Problem' },
     { id: 'problem', label: 'Problem', section: 'Fas 1: Problem' },
@@ -1175,13 +1173,6 @@ function App() {
             </button>
           </div>
         </div>
-      )}
-
-      {/* Intro slide */}
-      {screen === 'intro' && (
-        <IntroSlide
-          onContinue={() => navigate('hook-slide')}
-        />
       )}
 
       {/* Hook slide */}

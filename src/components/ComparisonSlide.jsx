@@ -19,7 +19,6 @@ function ComparisonSlide({ onContinue, onBack }) {
 
       <div className="slide-card comparison-slide">
 
-        <div className="slide-content-center">
         <h2 className="comparison-title">{showAfter ? 'Före & Efter' : 'Idag'}</h2>
         <p className="comparison-subtitle">
           {showAfter ? 'Samma resa. Samma störning. Helt annan upplevelse.' : 'En resa utan stöd'}
@@ -101,8 +100,6 @@ function ComparisonSlide({ onContinue, onBack }) {
               </div>
             </div>
           )}
-        </div>
-
         </div>
 
         <div className="slide-actions">

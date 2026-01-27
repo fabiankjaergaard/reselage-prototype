@@ -4,7 +4,6 @@ function ProblemSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card problem-slide">
 
-        <div className="slide-content-center">
         <h2 className="problem-title">Bil vs Kollektivtrafik</h2>
         <p className="problem-subtitle">Samma störning, olika upplevelser</p>
 
@@ -55,8 +54,6 @@ function ProblemSlide({ onContinue, onBack, onSkipToPrototype }) {
               </div>
             </div>
           </div>
-        </div>
-
         </div>
 
         <div className="slide-actions">

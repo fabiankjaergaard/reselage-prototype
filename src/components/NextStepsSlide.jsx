@@ -4,7 +4,6 @@ function NextStepsSlide({ onContinue, onBack }) {
 
       <div className="slide-card next-steps-slide">
 
-        <div className="slide-content-center">
         <div className="next-steps-header">
           <h2 className="next-steps-title">Nästa steg</h2>
           <p className="next-steps-subtitle">Hur vi går vidare</p>
@@ -39,8 +38,6 @@ function NextStepsSlide({ onContinue, onBack }) {
             <img src="/stina.png" alt="Stina" className="closing-avatar" />
             <p>"Stina har äntligen kontroll - utan att behöva ta den."</p>
           </div>
-        </div>
-
         </div>
 
         <div className="slide-actions">

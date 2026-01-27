@@ -4,7 +4,6 @@ function SolutionSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card solution-slide">
 
-        <div className="slide-content-center">
         <div className="solution-label">Lösningen</div>
 
         <h1 className="solution-name">Reseläge</h1>
@@ -55,8 +54,6 @@ function SolutionSlide({ onContinue, onBack, onSkipToPrototype }) {
               <span className="benefit-desc">Övervakar resan i bakgrunden</span>
             </div>
           </div>
-        </div>
-
         </div>
 
         <div className="slide-actions">

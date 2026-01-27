@@ -4,7 +4,6 @@ function InsightSlide({ onContinue, onBack, onSkipToPrototype }) {
 
       <div className="slide-card insight-slide">
 
-        <div className="slide-content-center">
         <h2 className="insight-title">Vad vi lärde oss</h2>
 
         <div className="insight-comparison">
@@ -37,8 +36,6 @@ function InsightSlide({ onContinue, onBack, onSkipToPrototype }) {
             <strong>De vill känna sig omhändertagna hela vägen.</strong>
           </p>
           <div className="reveal-line"></div>
-        </div>
-
         </div>
 
         <div className="slide-actions">

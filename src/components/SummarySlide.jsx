@@ -4,7 +4,6 @@ function SummarySlide({ onContinue, onBack }) {
 
       <div className="slide-card summary-slide">
 
-        <div className="slide-content-center">
         <div className="summary-header">
           <div className="summary-label">Sammanfattning</div>
           <h1 className="summary-name">Reseläge</h1>
@@ -73,8 +72,6 @@ function SummarySlide({ onContinue, onBack }) {
           <div className="outcome-text">
             <strong>Resultatet?</strong> En personaliserad resa utifrån vad som är viktigt för individen. En resenär som känner sig <em>omhändertagen</em>, har <em>kontroll</em>, och når fram i tid – utan stress.
           </div>
-        </div>
-
         </div>
 
         <div className="slide-actions">
