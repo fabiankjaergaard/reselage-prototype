@@ -14,7 +14,7 @@ function CalmJourneyScreen({ onComplete }) {
       <div className="svt-ticker">
         <div className="svt-ticker-item">
           <span className="svt-ticker-live">LIVE</span>
-          <span className="svt-ticker-text">Mikael Vimmenby – om framgångssagan bakom SL:s nya app</span>
+          <span className="svt-ticker-text">Mikael Vemmenby – om framgångssagan bakom SL:s nya app</span>
         </div>
       </div>
 

@@ -10,7 +10,7 @@ function InsightSlide({ onContinue, onBack, onSkipToPrototype }) {
           <div className="insight-box insight-before">
             <span className="insight-box-label">Vi trodde</span>
             <p className="insight-box-text">
-              "Det handlar om <span className="strikethrough">trängsel</span>, <span className="strikethrough">fulla bussar</span> och <span className="strikethrough">bekvämlighet</span>"
+              "Det handlar om <span className="strikethrough">trängsel</span>, <span className="strikethrough">fulla bussar</span>, <span className="strikethrough">bekvämlighet</span> och <span className="strikethrough">miljömedvetenhet</span>"
             </p>
           </div>
 
